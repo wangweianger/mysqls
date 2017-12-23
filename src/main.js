@@ -9,12 +9,15 @@
 import * as common from './common'
 import * as select from './select'
 
+//合并
 let sqljson = Object.assign({},common,select)
 
+//建立sql对象
 function mysql(){
-    this.sqlstr = {}
+    this.sqlObj = {}
 }
 
+//建立对象
 let sql = new mysql();
 
 for(let key in sqljson){

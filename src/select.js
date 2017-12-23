@@ -1,7 +1,8 @@
 
 export function select(){
-    let sql = `SELECT ${this.sqlstr.field||'*'} FROM ${this.sqlstr.table} where ${this.sqlstr.where}`
-    return sql;
+    // let sql = `SELECT ${this.sqlObj.field||'*'} FROM ${this.sqlObj.table} WHERE ${this.sqlObj.where}`
+
+    return this.sqlObj;
 }
 
 export function update(){

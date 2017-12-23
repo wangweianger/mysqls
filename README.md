@@ -1,5 +1,7 @@
 # node-transform-mysql
 
+### 功能开发中...
+
 >  * parcel 搭建服务器
 >  * babel  编译
 

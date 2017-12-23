@@ -11,7 +11,7 @@
     "url": "git+https://github.com/wangweianger/redux-source-code-learning.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "ISC", 
   "bugs": {
     "url": "https://github.com/wangweianger/redux-source-code-learning/issues"
   },

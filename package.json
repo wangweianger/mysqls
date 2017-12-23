@@ -1,0 +1,29 @@
+{
+  "name": "redux-source-code-learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangweianger/redux-source-code-learning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangweianger/redux-source-code-learning/issues"
+  },
+  "homepage": "https://github.com/wangweianger/redux-source-code-learning#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "symbol-observable": "^1.1.0"
+  }
+}

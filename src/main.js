@@ -15,7 +15,10 @@ for(let key in common){
 }
 
 
-let sqlstr = sql.table('user').field('id,name,class').where('type=1 AND status=1').select();
+let sqlstr = sql.table('user')  
+            .field('id,name,class')
+            .where('type=1 AND status=1')
+            .select();
 
 console.log(sqlstr)
 

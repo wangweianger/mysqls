@@ -20,9 +20,10 @@ npm run dev
 ```
  import sql from 'node-transform-mysql'
 
- let mysqlstr = sql.table('user').field('id,name,class').where('type=1 AND status=1').select();
 
- 最终得到的sql为：
+ sql.table('user').field('id,name,class').where('type=1 AND status=1').select();
+
+ 得到sql语句：
  SELECT id,name,class FROM user where type=1 AND status=1
 
 ```

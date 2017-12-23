@@ -17,9 +17,4 @@ export function field(field){
 
 
 
-export function select(){
-    let sql = `SELECT ${this.sqlstr.field||'*'} FROM ${this.sqlstr.table} where ${this.sqlstr.where}`
-    return sql;
-}
-
 

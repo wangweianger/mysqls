@@ -1,8 +1,15 @@
-
+/*
+    auther : zane
+    version: 1.0.0
+    blog:http://blog.seosiwei.com
+    github:https://github.com/wangweianger/node-transform-mysql
+    npm:
+*/
 
 import * as common from './common'
+import * as select from './select'
 
-// import select from './select'
+let sqljson = Object.assign({},common,select)
 
 function mysql(){
     this.sqlstr = {}
@@ -10,18 +17,8 @@ function mysql(){
 
 let sql = new mysql();
 
-for(let key in common){
-    mysql.prototype[key]=common[key].bind(sql)
+for(let key in sqljson){
+    mysql.prototype[key]=sqljson[key].bind(sql)
 }
 
-
-let sqlstr = sql.table('user')  
-            .field('id,name,class')
-            .where('type=1 AND status=1')
-            .select();
-
-console.log(sqlstr)
-
-
-//SELECT * FROM user where type=1 AND status=1
-
+export default sql

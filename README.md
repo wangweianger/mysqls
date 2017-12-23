@@ -1,4 +1,4 @@
-# REACT-REDUX 源码解析
+# node-transform-mysql
 
 >  * parcel 搭建服务器
 >  * babel  编译
@@ -13,3 +13,14 @@ npm run dev
 
 ``` 
 
+### 运行案例
+
+```
+ import sql from 'node-transform-mysql'
+
+ let mysqlstr = sql.table('user').field('id,name,class').where('type=1 AND status=1').select();
+
+ 最终得到的sql为：
+ SELECT id,name,class FROM user where type=1 AND status=1
+
+```

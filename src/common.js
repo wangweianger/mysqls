@@ -41,9 +41,15 @@ function getOptToString(opt){
         }
         result = result.slice(0,-4)
     }else if(optType === '[object Array]'){
-
+        opt.forEach(item=>{
+            let typeStr = item._type&&item._type.toUpperCase() || 'AND'
+            for(let key in item){
+                if(key === '_type') continue;
+                result = result + `${key}=${item[key]} ${typeStr} `
+            }
+            result = result.slice(0,-4)
+        })
     }
-
     return result
 }
 

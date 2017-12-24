@@ -1,5 +1,5 @@
 {
-  "name": "redux-source-code-learning",
+  "name": "node-transform-mysql",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangweianger/redux-source-code-learning.git"
+    "url": "git+https://github.com/wangweianger/node-transform-mysql.git"
   },
   "author": "",
   "license": "ISC", 
-  "bugs": {
-    "url": "https://github.com/wangweianger/redux-source-code-learning/issues"
-  },
-  "homepage": "https://github.com/wangweianger/redux-source-code-learning#readme",
+  "homepage": "http://blog.seosiwei.com/",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

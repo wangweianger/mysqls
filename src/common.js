@@ -61,10 +61,11 @@ export function alias(opt){
   参数为 json | string
   案例： {name:'zane',email:'752636052@qq.com'}  |  'name=zane&email=752636052@qq.com'
 */
-export function data(opt){
-    let keys=''
-    let values=''
-    let newopt={}
+export function data(opt,type='insert'){
+    let keys    =''
+    let values  =''
+    let result  = ''
+    let newopt  ={}
 
     if(typeof(opt)==='string'){
         let arr = opt.split('&')
@@ -75,13 +76,21 @@ export function data(opt){
     }else{
         newopt=opt
     }
-
-    for(let key in newopt){
-        keys    = keys ? `${keys},${key}` : key
-        values  = values ? `${values},${checkOptType(newopt[key])}` : checkOptType(newopt[key])
+    if(type === 'insert'){
+        for(let key in newopt){
+            keys    = keys ? `${keys},${key}` : key
+            values  = values ? `${values},${checkOptType(newopt[key])}` : checkOptType(newopt[key])
+        }
+        this.sqlObj.data=`(${keys}) VALUES (${values})`
+    }else{
+        let keys = Object.keys(newopt)
+        keys.forEach((item,index)=>{
+            result =  index==newopt.length-1 ?
+                      `${result}${item}=${checkOptType(newopt[item])},`:
+                      `${result}${item}=${checkOptType(newopt[item])}`
+        })
+        this.sqlObj.data = result
     }
-
-    this.sqlObj.data=`(${keys}) VALUES (${values})`
     return this
 }
 
@@ -89,7 +98,7 @@ export function data(opt){
   参数为 Array | string
   案例： order(['id','number asc'])  | order('id desc')
 */
-export function order(opt){
+export function order(opt,type=true){
     let orderby = 'ORDER BY'
 
     if(typeof(opt) === 'object'){
@@ -189,7 +198,6 @@ export function comment(opt){
     }
     return this
 }
-
 
 export function count(opt){
     let optvalue = opt || 1

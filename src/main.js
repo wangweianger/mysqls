@@ -7,21 +7,18 @@
 */
 
 import * as common from './common'
-import * as select from './select'
+import * as curd from './curd'
 
 //合并
-let sqljson = Object.assign({},common,select)
+let sqljson = Object.assign({},common,curd)
 
 //建立sql对象
 function mysql(){
     this.sqlObj = {}
 }
 
-//建立对象
-let sql = new mysql();
-
 for(let key in sqljson){
-    mysql.prototype[key]=sqljson[key].bind(sql)
+    mysql.prototype[key]=sqljson[key]
 }
 
-export default sql
+export default new mysql()

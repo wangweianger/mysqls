@@ -25,7 +25,12 @@ let sqlstr = sql.table('user')
             .comment('查询个人数据')
             .select();
 
-console.log(sqlstr)
+// console.log(sqlstr)
 
+let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
+console.log(insertSql)
+
+let updateSql = sql.table('user').data('name=zane&email=752636052@qq.com','update').update();
+console.log(updateSql)
 
 //SELECT * FROM user where type=1 AND status=1

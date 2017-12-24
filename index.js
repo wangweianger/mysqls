@@ -6,8 +6,13 @@ import sql from './src/main'
 
 let sqlstr = sql.table('user')  
             .field('id,name,class')
-            // .where({type:1,status:1,sex:2,_type:'and'})
-            .where([{type:1,status:1,_type:'or'},{sex:1,_type:'and'}])
+            // .where({type:1,status:{ eq:100,egt:10},sex:2,_type:'and'})
+            .where([
+                {type:1,status:{ eq:100,egt:10},_type:'or',_nexttype:'and'},
+                // {sex:1,_nexttype:'or'},
+                // {name:'zhangsan'}
+            ])
+            // .where({type:{ eq:100,notin:'1,8',_type:'and'}})
             .data('name=zane&email=752636052@qq.com')
             .order(['id','number asc'])
             // .limit(10,20)

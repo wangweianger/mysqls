@@ -1,7 +1,7 @@
 
-//table表
+//需要查询的table表  参数：String  案例：table('user')
 export function table(opt){
-    this.sqlObj.table = opt
+    if(opt) this.sqlObj.table = opt
     return this;
 } 
 
@@ -10,17 +10,41 @@ export function table(opt){
   案例： query('SELECT * FROM user_name')
 */
 export function query(opt){
-    this.sqlObj.query = opt
+    if(opt) this.sqlObj.query = opt
     return this;
 }
 
 /*where条件
-  参数为 String | Array | Object |
+  参数为 String | Array | Object 
   案例： 
 */
 export function where(opt){
-    this.sqlObj.where = opt
+    let result = ''
+    if(typeof(opt)==='string'){
+        result = opt
+    }else{
+        result = getOptToString(opt)
+    }
+    if(result) this.sqlObj.where = result
     return this;
+}
+
+//把查询参数转换为strng
+function getOptToString(opt){
+    let result  = ''
+    let optType = Object.prototype.toString.call(opt)
+    if(optType==='[object Object]'){
+        let typeStr = opt._type&&opt._type.toUpperCase() || 'AND'
+        for(let key in opt){
+            if(key === '_type') continue;
+            result = result + `${key}=${opt[key]} ${typeStr} `
+        }
+        result = result.slice(0,-4)
+    }else if(optType === '[object Array]'){
+
+    }
+
+    return result
 }
 
 /*查询字段
@@ -154,6 +178,41 @@ export function distinct(opt){
     }
     return this
 }
+
+/* lock 锁语法
+    参数类型： Boolean
+    案例：  lock(true)
+ */
+export function lock(opt){
+    if(opt){
+        this.sqlObj.lock = 'FOR UPDATE'
+    }
+    return this
+}
+
+/* comment 为sql语句添加注释
+    参数类型： String
+    案例：  comment('查询用户的姓名')
+ */
+export function comment(opt){
+    if(opt){
+        this.sqlObj.comment = `/* ${opt} */`
+    }
+    return this
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

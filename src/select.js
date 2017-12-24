@@ -1,5 +1,6 @@
 
 export function select(){
+    console.log(this)
     // let sql = `SELECT ${this.sqlObj.field||'*'} FROM ${this.sqlObj.table} WHERE ${this.sqlObj.where}`
 
     return this.sqlObj;

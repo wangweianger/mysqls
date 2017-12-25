@@ -46,15 +46,21 @@ where查询支持 字符串：String , JSON对象 ,表达式查询,JSON对象数
     SELECT * FROM node_table WHERE id=1 OR name=`zhangshan`
 ```
 
-### 表达式查询
+### 表达式查询 （直接参考 thinkphp 的api）
 上面的查询条件仅仅是一个简单的相等判断，可以使用查询表达式支持更多的SQL查询语法，查询表达式的使用格式：
+表达式不分大小写，支持的查询表达式有下面几种，分别表示的含义是：
 
-
-|Tables         | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+|表达式         | 含义            |
+| ------------- |:-------------: |
+| EQ            | 等于（=）        |
+| NEQ           | 不等于（<>）     |
+| GT            | 大于（>）        |
+| EGT           | 大于等于（>=）    |
+| LT            | 小于（<）        |
+| ELT           | 小于等于（<=）    |
+| LIKE          | 模糊查询         |
+| [NOT] BETWEEN | 不在）区间查询    |
+| [NOT] IN      | （不在）IN 查询   |
 
 
 

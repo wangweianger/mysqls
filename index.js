@@ -29,11 +29,11 @@ import sql from './src/main'
 //             .where({id:1,name:'wangwei'})
 //             .select();
 
-let sqlstr = sql.table('user')
-            .where({id:{ eq:2,egt:10,_type:'or'}})
-            .select();
+// let sqlstr = sql.table('user')
+//             .where({id:{ eq:2,egt:10,_type:'or'}})
+//             .select();
 
-console.log(sqlstr) 
+console.log(sql.table('user_table').field('id,name').where({id:{eq:100,egt:10}}).select()) 
 
 // let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
 // console.log(insertSql)

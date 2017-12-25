@@ -1,6 +1,6 @@
 # [node-transform-mysql文档](https://wangweianger.gitbooks.io/node-transform-mysql/content/)
 
-node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生成相应的sql数据。
+node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
 
 它所做的事情很简单也很专一，只负责生成sql语句，不执行任何的增删改查。
 

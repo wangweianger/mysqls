@@ -33,11 +33,10 @@ import sql from './src/main'
 //             .where({id:{ eq:2,egt:10,_type:'or'}})
 //             .select();
 let data={
-        id:{eq:100,egt:10,_type:'or'},
-        name:'zhangshan'
+        id:1
     }
     
-console.log(sql.table('node_table').where(data).select()) 
+console.log(sql.table('node_table').where('id=1').select()) 
 
 // let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
 // console.log(insertSql)

@@ -25,7 +25,7 @@ where查询支持 字符串：String , JSON对象 ,数组对象查询 , 表达�
     sql.table('node_table').where(data).select()
 ```
 
-最后胜出的SQL语句是
+最后得出的SQL语句是
 ```js
     SELECT * FROM node_table WHERE id=1 AND name=`zhangshan`
 ```
@@ -41,7 +41,7 @@ where查询支持 字符串：String , JSON对象 ,数组对象查询 , 表达�
     sql.table('node_table').where(data).select()
 ```
 
-最后胜出的SQL语句是
+最后得出的SQL语句是
 ```js
     SELECT * FROM node_table WHERE id=1 OR name=`zhangshan`
 ```
@@ -55,7 +55,7 @@ where查询支持 字符串：String , JSON对象 ,数组对象查询 , 表达�
     sql.table('node_table').where(data).select()
 ```
 
-最后胜出的SQL语句是
+最后得出的SQL语句是
 ```js
     SELECT * FROM node_table WHERE  (id=1 AND name=`zhangsan`) 
 ```
@@ -69,7 +69,7 @@ where查询支持 字符串：String , JSON对象 ,数组对象查询 , 表达�
     sql.table('node_table').where(data).select()
 ```
 
-最后胜出的SQL语句是
+最后得出的SQL语句是
 ```js
     SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan` ) AND (sex=1 AND number=3 )
 ```
@@ -84,13 +84,13 @@ JSON字段之间默认用 AND 链接，若要指定连接方法可以传参数 `
     sql.table('node_table').where(data).select()
 ```
 
-最后胜出的SQL语句是
+最后得出的SQL语句是
 ```js
     SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan`) OR (sex=1 AND number=3)
 ```
 
 
-### 表达式查询 （直接参考 thinkphp 的api）不区分大小写
+### 表达式查询 （直接参考的thinkphp的api）不区分大小写
 上面的查询条件仅仅是一个简单的相等判断，可以使用查询表达式支持更多的SQL查询语法，查询表达式的使用格式：
 表达式不分大小写，支持的查询表达式有下面几种，分别表示的含义是：
 
@@ -115,7 +115,7 @@ JSON字段之间默认用 AND 链接，若要指定连接方法可以传参数 `
     sql.table('node_table').where(data).select()
 ```
 
-最后胜出的SQL语句是
+最后得出的SQL语句是
 ```js
     SELECT  * FROM node_table WHERE ((id=100) OR (id>=10)) AND name=`zhangshan`
 ```

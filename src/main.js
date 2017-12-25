@@ -20,7 +20,7 @@ function mysql(){
 let sqlObj = new mysql()
 
 for(let key in sqljson){
-    mysql.prototype[key]=sqljson[key]
+    mysql.prototype[key]=sqljson[key].bind(sqlObj)
 }
 
 export default sqlObj

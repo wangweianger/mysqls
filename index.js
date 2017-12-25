@@ -30,7 +30,10 @@ let sqlstr = sql.table('user')
 let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
 console.log(insertSql)
 
-let updateSql = sql.table('user').data('name=zane&email=752636052@qq.com','update').update();
+let updateSql = sql.table('user').data('name=zane&email=752636052@qq.com',true).update();
 console.log(updateSql)
+
+let delSql = sql.table('user').where('name=`zane`').delet();
+console.log(delSql)
 
 //SELECT * FROM user where type=1 AND status=1

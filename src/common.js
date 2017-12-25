@@ -12,15 +12,6 @@ export function table(opt){
     return this;
 } 
 
-/*query输入sql查询
-  参数为 String
-  案例： query('SELECT * FROM user_name')
-*/
-export function query(opt){
-    if(opt) this.sqlObj.query = opt
-    return this;
-}
-
 /*where条件
   参数为 String | Array | Object 
   案例： 
@@ -61,7 +52,7 @@ export function alias(opt){
   参数为 json | string
   案例： {name:'zane',email:'752636052@qq.com'}  |  'name=zane&email=752636052@qq.com'
 */
-export function data(opt,type='insert'){
+export function data(opt,type=false){
     let keys    =''
     let values  =''
     let result  = ''
@@ -76,7 +67,7 @@ export function data(opt,type='insert'){
     }else{
         newopt=opt
     }
-    if(type === 'insert'){
+    if(!type){
         for(let key in newopt){
             keys    = keys ? `${keys},${key}` : key
             values  = values ? `${values},${checkOptType(newopt[key])}` : checkOptType(newopt[key])
@@ -85,9 +76,9 @@ export function data(opt,type='insert'){
     }else{
         let keys = Object.keys(newopt)
         keys.forEach((item,index)=>{
-            result =  index==newopt.length-1 ?
-                      `${result}${item}=${checkOptType(newopt[item])},`:
-                      `${result}${item}=${checkOptType(newopt[item])}`
+            result =  index==keys.length-1?
+                      `${result}${item}=${checkOptType(newopt[item])}`:
+                      `${result}${item}=${checkOptType(newopt[item])},`
         })
         this.sqlObj.data = result
     }

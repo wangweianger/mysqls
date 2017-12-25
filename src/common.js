@@ -12,7 +12,7 @@ export function table(opt){
 } 
 
 /*where条件
-  参数为 String | object Object | object Array
+  参数为 String | Object | Array
   案例： 
 */
 export function where(opt){

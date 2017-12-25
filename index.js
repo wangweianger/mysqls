@@ -33,9 +33,8 @@ import sql from './src/main'
 //             .where({id:{ eq:2,egt:10,_type:'or'}})
 //             .select();
 let data={
-        id:1,
-        name:'zhangshan',
-        _type:'or'
+        id:{eq:100,egt:10,_type:'or'},
+        name:'zhangshan'
     }
     
 console.log(sql.table('node_table').where(data).select()) 

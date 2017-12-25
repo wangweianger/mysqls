@@ -134,6 +134,9 @@ export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
             break; 
         case 'BETWEEN':
             result = `(${par_key} BETWEEN ${value.replace(',',' AND ')})`
+            break;
+        case 'NOTBETWEEN': 
+            result = `(${par_key} NOT BETWEEN ${value.replace(',',' AND ')})`
             break; 
         case 'IN':
             result = `(${par_key} IN (${value}))`

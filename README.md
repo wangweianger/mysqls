@@ -29,17 +29,17 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 ### 看起来如何工作
 
 ```js
-    调用：sql.table('user_table').where({id:1,name:'zane'}).select()
-    结果：SELECT  * FROM user_table WHERE id=1 AND name=`zane`
+    调用：sql.table('node_table').where({id:1,name:'zane'}).select()
+    结果：SELECT  * FROM node_table WHERE id=1 AND name=`zane`
 
-    调用：sql.table('user_table').where({id:1,name:'zane',_type:'or'}).select()
-    结果：SELECT  * FROM user_table WHERE id=1 OR name=`zane`
+    调用：sql.table('node_table').where({id:1,name:'zane',_type:'or'}).select()
+    结果：SELECT  * FROM node_table WHERE id=1 OR name=`zane`
 
-    调用：sql.table('user_table').where({id:{eq:100,egt:10}}).select()
-    结果：SELECT  * FROM user_table WHERE ((id=100) AND (id>=10))
+    调用：sql.table('node_table').where({id:{eq:100,egt:10}}).select()
+    结果：SELECT  * FROM node_table WHERE ((id=100) AND (id>=10))
 
-    调用：sql.table('user_table').field('id,name').where({id:{eq:100,egt:10}}).select()
-    结果：SELECT id,name FROM user_table WHERE ((id=100) AND (id>=10))
+    调用：sql.table('node_table').field('id,name').where({id:{eq:100,egt:10}}).select()
+    结果：SELECT id,name FROM node_table WHERE ((id=100) AND (id>=10))
 
     ......
 ```

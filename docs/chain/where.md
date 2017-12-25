@@ -1,15 +1,55 @@
-* [**2.链式操作**](/docs/chain/README.md)
- * [**2.1.WHERE**](/docs/chain/where.md)
- * [**2.2.TABLE**](/docs/chain/table.md)
- * [**2.3.ALIAS**](/docs/chain/alias.md)
- * [**2.4.DATA**](/docs/chain/data.md)
- * [**2.5.FIELD**](/docs/chain/field.md)
- * [**2.6.ORDER**](/docs/chain/order.md)
- * [**2.7.LIMIT**](/docs/chain/limit.md)
- * [**2.8.PAGE**](/docs/chain/page.md)
- * [**2.9.GROUP**](/docs/chain/group.md)
- * [**2.10.HAVING**](/docs/chain/having.md)
- * [**2.11.UNION**](/docs/chain/union.md)
- * [**2.12.DISTINCT**](/docs/chain/distinct.md)
- * [**2.13.LOCK**](/docs/chain/lock.md)
- * [**2.14.COMMENT**](/docs/chain/comment.md)
+where方法的用法是mysql查询语句的精髓，也是最复杂的部分，任何一个封装的sql库where会是最复杂的一个部分。
+where查询支持 字符串：String , JSON对象 两种方式
+
+### 字符串查询
+
+```js 
+    //这里需要注意的是传入的字符串需要是合格的sql语法，字符串需要有引号
+    sql.table('node_table').where('id=1 AND name=`张三`').select()
+    
+```
+
+最后生成的SQL语句是 
+```js
+    SELECT  * FROM node_table WHERE id=1 AND name=`张三`
+```
+
+
+## JSON对象查询
+
+```js
+    let data={
+        id:1,
+        name:'zhangshan'
+    }
+    sql.table('node_table').where(data).select()
+```
+
+最后胜出的SQL语句是
+```js
+    SELECT * FROM node_table WHERE id=1 AND name=`zhangshan`
+```
+
+字段之间默认用 AND 链接，若要指定连接方法可以传参数 `_type:'or' ||  _type:'and'`
+
+```js
+    let data={
+        id:1,
+        name:'zhangshan',
+        _type:'or'
+    }
+    sql.table('node_table').where(data).select()
+```
+
+最后胜出的SQL语句是
+```js
+    SELECT * FROM node_table WHERE id=1 OR name=`zhangshan`
+```
+
+
+
+
+
+
+
+

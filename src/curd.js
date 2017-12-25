@@ -46,8 +46,8 @@ export function delet(){
 export function query(opt){
     return opt?opt:'';
 }
-
-
+ 
+ 
 
 
 

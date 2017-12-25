@@ -33,7 +33,7 @@ let sqlstr = sql.table('user')
             .where({id:{ eq:2,egt:10,_type:'or'}})
             .select();
 
-console.log(sqlstr)
+console.log(sqlstr) 
 
 // let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
 // console.log(insertSql)

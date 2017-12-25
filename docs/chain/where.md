@@ -1,5 +1,5 @@
 where方法的用法是mysql查询语句的精髓，也是最复杂的部分，任何一个封装的sql库where会是最复杂的一个部分。
-where查询支持 字符串：String , JSON对象 两种方式
+where查询支持 字符串：String , JSON对象 ,表达式查询,JSON对象数组查询
 
 ### 字符串查询
 
@@ -15,7 +15,7 @@ where查询支持 字符串：String , JSON对象 两种方式
 ```
 
 
-## JSON对象查询
+### JSON对象查询
 
 ```js
     let data={
@@ -46,7 +46,15 @@ where查询支持 字符串：String , JSON对象 两种方式
     SELECT * FROM node_table WHERE id=1 OR name=`zhangshan`
 ```
 
+### 表达式查询
+上面的查询条件仅仅是一个简单的相等判断，可以使用查询表达式支持更多的SQL查询语法，查询表达式的使用格式：
 
+
+|Tables         | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
 
 

@@ -1,6 +1,6 @@
 ## 文档目录
 
-* [简介](/docs/Introduction.md)
+* **[简介](/docs/Introduction.md)**
 * [链式操作](/docs/guides/chain/README.md)
  * [WHERE](/docs/guides/chain/where.md)
  * [TABLE](/docs/guides/chain/table.md)

@@ -1,19 +1,20 @@
 import {
-    checkField
+    sortSelectSql
 } from './uitl'
 
 
 export function select(){
     let result = ''
-    // let newJsonObject = checkField(this.sqlObj)
+    let newSqlObj = sortSelectSql(this.sqlObj)
+
+    newSqlObj.sortkeys.forEach(item=>{
+        if(item){
+            result = `${result} ${newSqlObj.result[item]}`
+        }
+    })
 
     this.sqlObj = {}
-    // console.log(newJsonObject)
-
-    // for(let key in this.sqlObj){
-    //     result = `${result} ${this.sqlObj[key]} `
-    // }
-    // return `SELECT ${result}`;
+    return `SELECT ${result} `;
 }
 
 export function update(){

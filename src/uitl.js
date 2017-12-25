@@ -147,44 +147,40 @@ export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
     return isLastOne ? `${result} ` : `${result} ${_type} `
 }
 
-// 检查生成mysql字段
-export function checkField(json){
-    let result = json || {}
-    let keys = Object.keys(result)
-
-    if(keys.indexOf(field) == -1){
-        result.field = '*'
-    }
-
-    return result
-}
-
 //排序 生成 sql 字符串
-export function sortSql(json){
-    let result      = json || {}
-    let searchSort  =   [
-                            'query',
-                            'union',
-                            'distinct','field',
-                            'count','max','min','avg','sum',
-                            'table','alias',
-                            'where',
-                            'group','having','order','limit','page',
-                            'comment'
+export function sortSelectSql(json){
+    let result          = json || {}
 
-                        ]
+    if(!result.field) result.field = '*'
+    if(result.table) result.table = `FROM ${result.table}`
+    if(result.where) result.where = `WHERE ${result.where}`     
 
-    let updateSort  =   [
-                            'table',
-                            'data',
-                            'where'
-                        ] 
-    let insertSort  =   [
-                            'table',
-                            'data',
-                        ]
-    let delteSort   =   [
-                            'table',
-                            'where'
-                        ]                    
+    let keys = Object.keys(result)
+    let keysresult = []
+
+    // 查询默认排序数组
+    let searchSort  =  ['union','distinct','field','count','max','min','avg','sum','table',
+                        'alias','where','group','having','order','limit','page','comment']
+
+    //排序                    
+    keys.forEach((item1,index1)=>{
+        searchSort.forEach((item2,index2)=>{
+            if(item1 === item2){
+                keysresult[index2] = item1
+            }
+        })
+    })
+
+    return {
+        sortkeys:keysresult,
+        result:result
+    };               
 }
+
+
+
+
+
+
+
+

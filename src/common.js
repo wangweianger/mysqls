@@ -109,15 +109,21 @@ export function limit(){
 }
 
 /*page 语句
-  参数类型 ： Number
-  案例 page(1,10)  | page(2,10)
+  参数类型 ： Number | String
+  案例 page(1,10)  | page(2,10) | page('3,10')
  */
-export function page(){
-    let opt     = Array.prototype.slice.apply(arguments)
-    let begin   = (opt[0]-1) * opt[1]
-    let end     = begin + opt[1] -1
-
-    this.sqlObj.limit = `LIMIT ${begin},${end}` 
+export function page(option){
+    let opt     = []
+    if(arguments.length === 1){
+        opt     = option.split(',');
+    }else{
+        opt     = Array.prototype.slice.apply(arguments)
+    }
+    if(opt.length==2){
+        let begin   = parseInt(opt[0]-1) * parseInt(opt[1])
+        let end     = begin + parseInt(opt[1]) -1
+        this.sqlObj.limit = `LIMIT ${begin},${end}` 
+    }
     return this
 }
 
@@ -146,12 +152,16 @@ export function having(opt){
 export function union(opt,type=false){
     if(typeof(opt) === 'string'){
         if(this.sqlObj.union){
-            this.sqlObj.union = `${this.sqlObj.union} ${type?'UNION ALL':'UNION'} (${opt})`
+            this.sqlObj.union =`${this.sqlObj.union} (${opt}) ${type?'UNION ALL':'UNION'}`
         }else{
-            this.sqlObj.union = `(${opt})`
+            this.sqlObj.union =`(${opt}) ${type?'UNION ALL':'UNION'} `
         }
     }else if(typeof(opt)==='object'){
-        this.sqlObj.union = `(${opt.join( type?') UNION ALL (':') UNION (' )})`
+        if(this.sqlObj.union){
+            this.sqlObj.union =`${this.sqlObj.union} (${opt.join( type?') UNION ALL (':') UNION (' )})  ${type?'UNION ALL':'UNION'} `
+        }else{
+            this.sqlObj.union =`(${opt.join( type?') UNION ALL (':') UNION (' )}) ${type?'UNION ALL':'UNION'} `
+        }
     }
     return this
 }

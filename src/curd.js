@@ -5,16 +5,26 @@ import {
 
 export function select(){
     let result = ''
-    let newSqlObj = sortSelectSql(this.sqlObj)
+    if(this.sqlObj.union){
+        result = this.sqlObj.union
+        if(result.substr(-10).indexOf('ALL')!=-1){
+            result=result.replace(/\sUNION\sALL\s*$/,'')
+        }else{
+            result=result.replace(/\sUNION\s*$/,'')
+        }
+        this.sqlObj = {}
+        return result
+    }
 
+    let newSqlObj = sortSelectSql(this.sqlObj)
     newSqlObj.sortkeys.forEach(item=>{
         if(item){
             result = `${result} ${newSqlObj.result[item]}`
         }
     })
-
     this.sqlObj = {}
     return `SELECT ${result} `;
+    
 }
 
 export function update(){

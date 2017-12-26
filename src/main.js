@@ -17,10 +17,10 @@ function mysql(){
     this.sqlObj = {}
 }
 
-let sqlObj = new mysql()
+let newObj = new mysql()
 
 for(let key in sqljson){
-    mysql.prototype[key]=sqljson[key].bind(sqlObj)
+    mysql.prototype[key]=sqljson[key].bind(newObj)
 }
 
-export default sqlObj
+export default newObj

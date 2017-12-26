@@ -25,6 +25,7 @@ import sql from './src/main'
 //             .select();
 
 
+
 // let sqlstr = sql.table('user')
 //             .where({id:1,name:'wangwei'})
 //             .select();
@@ -32,11 +33,23 @@ import sql from './src/main'
 // let sqlstr = sql.table('user')
 //             .where({id:{ eq:2,egt:10,_type:'or'}})
 //             .select();
-let data={
-        id:1
-    }
+// let data={
+//         id:1
+//     }
     
-console.log(sql.table('node_table').where('id=1').select()) 
+console.log(sql
+        .union('SELECT * FROM think_user_1',true)
+        .union('SELECT * FROM think_user_2',true)
+        .union(['SELECT * FROM think_user_3','SELECT name FROM think_user_4'])
+        .union('SELECT * FROM think_user_5',true)
+        .select())
+
+// console.log(sql.table('node_table').where('id=1').select()) 
+
+// console.log(newsql().table('node_table').select())
+// console.log(newsql().table('node_table').where('id=1').select())
+
+// console.log(sql.table(`(${sql.table('user').where('id=2').select()})`).where('name=`zhangsan`').select()) 
 
 // let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
 // console.log(insertSql)
@@ -48,3 +61,5 @@ console.log(sql.table('node_table').where('id=1').select())
 // console.log(delSql)
 
 //SELECT * FROM user where type=1 AND status=1
+
+

@@ -26,6 +26,8 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
     var sql = require('node-transform-mysql')
 ```
 
+### sql调用方法的顺序内部已经做了排序，因此可以不按严格的sql语句顺序来写
+
 ### 简单用法
 
 ** 查询 **

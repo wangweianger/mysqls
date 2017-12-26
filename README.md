@@ -30,7 +30,7 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 
 ### 简单用法
 
-** 查询 **
+**查询**
 ```js
 sql
     .table('node_table')
@@ -50,7 +50,7 @@ SELECT id,name FROM node_table WHERE id=1
 
 ```
 
-** 插入 **
+**插入**
 ```js
 sql
     .table('node_table')
@@ -61,7 +61,7 @@ INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
 
 ```
 
-** 更新 **
+**更新**
 ```js
 sql
     .table('node_table')
@@ -72,20 +72,20 @@ UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
 
 ```
 
-** 删除 **
+**删除**
 ```js
 sql
-    .table('user')
+    .table('node_table')
     .where('name=`zane`')
     .delet();
 
-DELETE FROM user WHERE name=`zane`
+DELETE FROM node_table WHERE name=`zane`
     
 ```
 
 
 ### 高级用法
-** 数据库的查询是最复杂的，因此高级用法主要针对于查询 **
+**数据库的查询是最复杂的，因此高级用法主要针对于查询**
 ```js
 //参数json多字段
 sql
@@ -122,7 +122,6 @@ sql.table('node_table').where(data).select()
 
 SELECT  * FROM node_table WHERE ((id=100) OR (id>=10)) AND name=`zhangshan`
 
-
 //混合查询
 let data=[{
     id:{eq:100,egt:10,_type:'or'},
@@ -154,7 +153,7 @@ sql
 
 ```
 
-
+更多用法请查看详细文档
 
 ## 文档目录
 

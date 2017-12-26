@@ -37,28 +37,27 @@ import sql from './src/main'
 //         id:1
 //     }
     
-console.log(sql
-        .union('SELECT * FROM think_user_1',true)
-        .union('SELECT * FROM think_user_2',true)
-        .union(['SELECT * FROM think_user_3','SELECT name FROM think_user_4'])
-        .union('SELECT * FROM think_user_5',true)
-        .select())
+// console.log(sql
+//             .table('node_table')
+//             .field('id,name')
+//             .where({id:1})
+//             .select())
 
 // console.log(sql.table('node_table').where('id=1').select()) 
-
-// console.log(newsql().table('node_table').select())
-// console.log(newsql().table('node_table').where('id=1').select())
 
 // console.log(sql.table(`(${sql.table('user').where('id=2').select()})`).where('name=`zhangsan`').select()) 
 
 // let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
 // console.log(insertSql)
 
-// let updateSql = sql.table('user').data('name=zane&email=752636052@qq.com',true).update();
+// let updateSql = sql
+//             .table('user')
+//             .data({name:'zane',email:'752636052@qq.com'},true)
+//             .update()
 // console.log(updateSql)
 
-// let delSql = sql.table('user').where('name=`zane`').delet();
-// console.log(delSql)
+let delSql = sql.table('user').where('name=`zane`').delet();
+console.log(delSql)
 
 //SELECT * FROM user where type=1 AND status=1
 

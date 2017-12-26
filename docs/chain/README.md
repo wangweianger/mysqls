@@ -11,5 +11,4 @@
  * [**2.10.HAVING**](/docs/chain/having.md)
  * [**2.11.UNION**](/docs/chain/union.md)
  * [**2.12.DISTINCT**](/docs/chain/distinct.md)
- * [**2.13.LOCK**](/docs/chain/lock.md)
- * [**2.14.COMMENT**](/docs/chain/comment.md)
+ * [**2.13.COMMENT**](/docs/chain/comment.md)

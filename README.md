@@ -26,10 +26,57 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
     var sql = require('node-transform-mysql')
 ```
 
-### 看起来如何工作
-
+### 简单用法
 ```js
-    调用：sql.table('node_table').where({id:1,name:'zane'}).select()
+    调用：sql
+            .table('node_table')
+            .where('id=1')
+            .select()
+    结果：SELECT * FROM node_table WHERE id=1
+
+
+    调用：sql
+            .table('node_table')
+            .field('id,name')
+            .where({id:1})
+            .select()
+
+    结果：SELECT id,name FROM node_table WHERE id=1
+
+
+    调用：sql
+            .table('node_table')
+            .data('name=zane&email=752636052@qq.com')
+            .insert()
+
+    结果：INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
+
+    
+    调用：sql
+            .table('node_table')
+            .data({name:'zane',email:'752636052@qq.com'},true)
+            .update()
+
+    结果：UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
+   
+
+    调用：sql
+            .table('user')
+            .where('name=`zane`')
+            .delet();
+
+    结果：DELETE FROM user WHERE name=`zane`
+    
+    ......
+```
+
+
+### 高级用法
+```js
+    调用：sql
+            .table('node_table')
+            .where({id:1,name:'zane'})
+            .select()
     结果：SELECT  * FROM node_table WHERE id=1 AND name=`zane`
 
     调用：sql.table('node_table').where({id:1,name:'zane',_type:'or'}).select()
@@ -43,6 +90,8 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 
     ......
 ```
+
+
 
 ## 文档目录
 
@@ -60,8 +109,7 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
  * [**2.10.HAVING**](/docs/chain/having.md)
  * [**2.11.UNION**](/docs/chain/union.md)
  * [**2.12.DISTINCT**](/docs/chain/distinct.md)
- * [**2.13.LOCK**](/docs/chain/lock.md)
- * [**2.14.COMMENT**](/docs/chain/comment.md)
+ * [**2.13.COMMENT**](/docs/chain/comment.md)
 * [**3.CURD调用**](/docs/curd/README.md)
  * [**3.1.SELECT**](/docs/curd/select.md)
  * [**3.2.UPDATE**](/docs/curd/update.md)

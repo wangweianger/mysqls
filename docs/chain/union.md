@@ -64,6 +64,21 @@ sql
 ```
 
 
+**你甚至可以这样做**
+```js 
+sql
+    .union(sql.table('think_user_1').select(),true)
+    .union('SELECT * FROM think_user_5')
+    .select()
+```
+
+最终得到SQL
+```js
+(SELECT  * FROM think_user_1 WHERE id=1 ) UNION ALL  (SELECT * FROM think_user_2)
+```
+
+
+
 注意：UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。
 
 

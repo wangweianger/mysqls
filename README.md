@@ -29,12 +29,12 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 ### 简单用法
 
 ** 查询 **
-```
+```js
 sql
     .table('node_table')
     .where('id=1')
     .select()
-    
+
 SELECT * FROM node_table WHERE id=1
 
 
@@ -49,7 +49,7 @@ SELECT id,name FROM node_table WHERE id=1
 ```
 
 ** 插入 **
-```
+```js
 sql
     .table('node_table')
     .data('name=zane&email=752636052@qq.com')
@@ -60,7 +60,7 @@ INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
 ```
 
 ** 更新 **
-```
+```js
 sql
     .table('node_table')
     .data({name:'zane',email:'752636052@qq.com'},true)
@@ -79,7 +79,6 @@ sql
 
 DELETE FROM user WHERE name=`zane`
     
-    ......
 ```
 
 

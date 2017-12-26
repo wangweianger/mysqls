@@ -36,12 +36,18 @@ import sql from './src/main'
 // let data={
 //         id:1
 //     }
-    
-// console.log(sql
-//             .table('node_table')
-//             .field('id,name')
-//             .where({id:1})
-//             .select())
+   let data=[
+    {
+        id:{eq:100,egt:10,_type:'or'},
+        name:'zhangshan',
+        _nexttype:'or'
+    },
+    {
+        status:1,
+        name:{like:'%zane%'}
+    }
+] 
+console.log(sql.table('node_table').where(data).select())
 
 // console.log(sql.table('node_table').where('id=1').select()) 
 
@@ -56,8 +62,8 @@ import sql from './src/main'
 //             .update()
 // console.log(updateSql)
 
-let delSql = sql.table('user').where('name=`zane`').delet();
-console.log(delSql)
+// let delSql = sql.table('user').where('name=`zane`').delet();
+// console.log(delSql)
 
 //SELECT * FROM user where type=1 AND status=1
 

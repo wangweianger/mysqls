@@ -27,68 +27,129 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 ```
 
 ### 简单用法
+
+** 查询 **
+```
+调用：sql
+        .table('node_table')
+        .where('id=1')
+        .select()
+结果：SELECT * FROM node_table WHERE id=1
+
+
+调用：sql
+        .table('node_table')
+        .field('id,name')
+        .where({id:1})
+        .select()
+
+结果：SELECT id,name FROM node_table WHERE id=1
+
+```
+
+** 插入 **
+```
+调用：sql
+        .table('node_table')
+        .data('name=zane&email=752636052@qq.com')
+        .insert()
+
+结果：INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
+
+```
+
+** 更新 **
+```
+调用：sql
+        .table('node_table')
+        .data({name:'zane',email:'752636052@qq.com'},true)
+        .update()
+
+结果：UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
+
+```
+
+** 删除 **
 ```js
-    调用：sql
-            .table('node_table')
-            .where('id=1')
-            .select()
-    结果：SELECT * FROM node_table WHERE id=1
+调用：sql
+        .table('user')
+        .where('name=`zane`')
+        .delet();
 
-
-    调用：sql
-            .table('node_table')
-            .field('id,name')
-            .where({id:1})
-            .select()
-
-    结果：SELECT id,name FROM node_table WHERE id=1
-
-
-    调用：sql
-            .table('node_table')
-            .data('name=zane&email=752636052@qq.com')
-            .insert()
-
-    结果：INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
-
-    
-    调用：sql
-            .table('node_table')
-            .data({name:'zane',email:'752636052@qq.com'},true)
-            .update()
-
-    结果：UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
-   
-
-    调用：sql
-            .table('user')
-            .where('name=`zane`')
-            .delet();
-
-    结果：DELETE FROM user WHERE name=`zane`
+结果：DELETE FROM user WHERE name=`zane`
     
     ......
 ```
 
 
 ### 高级用法
+** 数据库的查询是最复杂的，因此高级用法主要针对于查询 **
 ```js
-    调用：sql
-            .table('node_table')
-            .where({id:1,name:'zane'})
-            .select()
-    结果：SELECT  * FROM node_table WHERE id=1 AND name=`zane`
+//参数json多字段
+sql
+    .table('node_table')
+    .where({id:1,name:'zane'})
+    .select()
 
-    调用：sql.table('node_table').where({id:1,name:'zane',_type:'or'}).select()
-    结果：SELECT  * FROM node_table WHERE id=1 OR name=`zane`
+SELECT  * FROM node_table WHERE id=1 AND name=`zane`
 
-    调用：sql.table('node_table').where({id:{eq:100,egt:10}}).select()
-    结果：SELECT  * FROM node_table WHERE ((id=100) AND (id>=10))
+//参数数组
+let data=[
+    {id:1,name:'zhangsan',_type:'or'},
+    {sex:1,number:3}
+]
+sql.table('node_table').where(data).select()
 
-    调用：sql.table('node_table').field('id,name').where({id:{eq:100,egt:10}}).select()
-    结果：SELECT id,name FROM node_table WHERE ((id=100) AND (id>=10))
+SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan` ) AND (sex=1 AND number=3 )
 
-    ......
+//多字段连接方式
+let data=[
+    {id:1,name:'zhangsan',_type:'or',_nexttype:'or'},
+    {sex:1,number:3,_type:'and'}
+]
+sql.table('node_table').where(data).select()
+
+SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan`) OR (sex=1 AND number=3)
+
+//表达式查询
+let data={
+    id:{eq:100,egt:10,_type:'or'},
+    name:'zhangshan'
+}
+sql.table('node_table').where(data).select()
+
+SELECT  * FROM node_table WHERE ((id=100) OR (id>=10)) AND name=`zhangshan`
+
+
+//混合查询
+let data=[{
+    id:{eq:100,egt:10,_type:'or'},
+    name:'zhangshan',
+    _nexttype:'or'
+},{
+    status:1,
+    name:{like:'%zane%'}
+}]
+sql.table('node_table').where(data).select()
+
+SELECT * FROM node_table WHERE (((id=100) OR (id>=10)) AND name=`zhangshan`) OR (status=1 AND ((name LIKE `%zane%`))) 
+
+
+//UNION ， UNION ALL 组合使用
+sql
+    .union('SELECT * FROM think_user_1',true)
+    .union('SELECT * FROM think_user_2',true)
+    .union(['SELECT * FROM think_user_3','SELECT name FROM think_user_4'])
+    .union('SELECT * FROM think_user_5',true)
+    .select()
+
+得到
+(SELECT * FROM think_user_1) UNION ALL  
+(SELECT * FROM think_user_2) UNION ALL 
+(SELECT * FROM think_user_3) UNION 
+(SELECT name FROM think_user_4)  UNION  
+(SELECT * FROM think_user_5)
+
 ```
 
 

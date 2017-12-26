@@ -101,7 +101,7 @@ export function checkOptObjType(pre_key,val){
     }else{
         result = `${pre_key}=${val}`
     }
-    return `(${result})`
+    return `(${result}) `
 }
 
 // 表达式匹配查询

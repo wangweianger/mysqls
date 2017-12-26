@@ -117,7 +117,7 @@ sql.table('node_table').where(data).select()
 
 最后得出的SQL语句是
 ```js
-    SELECT  * FROM node_table WHERE ((id=100) OR (id>=10)) AND name=`zhangshan`
+SELECT  * FROM node_table WHERE ((id=100) OR (id>=10)) AND name=`zhangshan`
 ```
 
 更多表达式查询请参考：[**4.2.表达式查询**](/docs/advanced/bdssearch.md)

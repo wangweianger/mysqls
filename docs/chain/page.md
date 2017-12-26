@@ -4,23 +4,23 @@ page方法属于链式调用方法之一，是完全为分页查询而诞生的�
 ### 例如
 
 ```js 
-    sql.table('node_table').page(1,10).select()  //查询第一页数据
-    sql.table('node_table').page(2,10).select()  //查询第二页数据
+sql.table('node_table').page(1,10).select()  //查询第一页数据
+sql.table('node_table').page(2,10).select()  //查询第二页数据
 ```
 
 
 也可以用字符串的方式传参
 
 ```js 
-    sql.table('node_table').page('1,10').select()  //查询第一页数据
-    sql.table('node_table').page('2,10').select()  //查询第二页数据
+sql.table('node_table').page('1,10').select()  //查询第一页数据
+sql.table('node_table').page('2,10').select()  //查询第二页数据
 ```
 
 
 最终得到
 ```js
-    SELECT * FROM node_table LIMIT 0,9
-    SELECT  * FROM node_table LIMIT 10,19
+SELECT * FROM node_table LIMIT 0,9
+SELECT  * FROM node_table LIMIT 10,19
 ```
 
 

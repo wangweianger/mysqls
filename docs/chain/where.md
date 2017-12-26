@@ -4,89 +4,89 @@ where查询支持 字符串：String , JSON对象 ,数组对象查询 , 表达�
 ### 字符串查询
 
 ```js 
-    //这里需要注意的是传入的字符串需要是合格的sql语法，字符串需要有引号
-    sql.table('node_table').where('id=1 AND name=`张三`').select()
+//这里需要注意的是传入的字符串需要是合格的sql语法，字符串需要有引号
+sql.table('node_table').where('id=1 AND name=`张三`').select()
     
 ```
 
 最后生成的SQL语句是 
 ```js
-    SELECT  * FROM node_table WHERE id=1 AND name=`张三`
+SELECT  * FROM node_table WHERE id=1 AND name=`张三`
 ```
 
 
 ### JSON对象查询
 
 ```js
-    let data={
-        id:1,
-        name:'zhangshan'
-    }
-    sql.table('node_table').where(data).select()
+let data={
+    id:1,
+    name:'zhangshan'
+}
+sql.table('node_table').where(data).select()
 ```
 
 最后得出的SQL语句是
 ```js
-    SELECT * FROM node_table WHERE id=1 AND name=`zhangshan`
+SELECT * FROM node_table WHERE id=1 AND name=`zhangshan`
 ```
 
 字段之间默认用 AND 链接，若要指定连接方法可以传参数 `_type:'or' ||  _type:'and'`
 
 ```js
-    let data={
-        id:1,
-        name:'zhangshan',
-        _type:'or'
-    }
-    sql.table('node_table').where(data).select()
+let data={
+    id:1,
+    name:'zhangshan',
+    _type:'or'
+}
+sql.table('node_table').where(data).select()
 ```
 
 最后得出的SQL语句是
 ```js
-    SELECT * FROM node_table WHERE id=1 OR name=`zhangshan`
+SELECT * FROM node_table WHERE id=1 OR name=`zhangshan`
 ```
 
 ### JSON对象数组查询
 ```js
-    let data=[{
-            id:1,
-            name:'zhangsan'
-        }]
-    sql.table('node_table').where(data).select()
+let data=[{
+        id:1,
+        name:'zhangsan'
+    }]
+sql.table('node_table').where(data).select()
 ```
 
 最后得出的SQL语句是
 ```js
-    SELECT * FROM node_table WHERE  (id=1 AND name=`zhangsan`) 
+SELECT * FROM node_table WHERE  (id=1 AND name=`zhangsan`) 
 ```
 
 多条json数组
 ```js
-    let data=[
-        {id:1,name:'zhangsan',_type:'or'},
-        {sex:1,number:3}
-    ]
-    sql.table('node_table').where(data).select()
+let data=[
+    {id:1,name:'zhangsan',_type:'or'},
+    {sex:1,number:3}
+]
+sql.table('node_table').where(data).select()
 ```
 
 最后得出的SQL语句是
 ```js
-    SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan` ) AND (sex=1 AND number=3 )
+SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan` ) AND (sex=1 AND number=3 )
 ```
 
 JSON字段之间默认用 AND 链接，若要指定连接方法可以传参数 `_nexttype:'or' ||  _nexttype:'and'`
 
 ```js
-    let data=[
-        {id:1,name:'zhangsan',_type:'or',_nexttype:'or'},
-        {sex:1,number:3,_type:'and'}
-    ]
-    sql.table('node_table').where(data).select()
+let data=[
+    {id:1,name:'zhangsan',_type:'or',_nexttype:'or'},
+    {sex:1,number:3,_type:'and'}
+]
+sql.table('node_table').where(data).select()
 ```
 
 最后得出的SQL语句是
 ```js
-    SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan`) OR (sex=1 AND number=3)
+SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan`) OR (sex=1 AND number=3)
 ```
 
 
@@ -108,11 +108,11 @@ JSON字段之间默认用 AND 链接，若要指定连接方法可以传参数 `
 
 例如：
 ```js
-    let data={
-        id:{eq:100,egt:10,_type:'or'},
-        name:'zhangshan'
-    }
-    sql.table('node_table').where(data).select()
+let data={
+    id:{eq:100,egt:10,_type:'or'},
+    name:'zhangshan'
+}
+sql.table('node_table').where(data).select()
 ```
 
 最后得出的SQL语句是

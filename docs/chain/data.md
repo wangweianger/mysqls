@@ -3,32 +3,32 @@ alias方法主要用于sql的 插入数据（insert） | 修改数据(update),�
 ### 插入数据
 
 ```js 
-    let data={
-        name:'zhangsan',
-        age:25
-    }
-    sql.table('node_table').data(data).insert()
+let data={
+    name:'zhangsan',
+    age:25
+}
+sql.table('node_table').data(data).insert()
 ```
 
 最终得到
 ```js
-    INSERT INTO node_table (name,age) VALUES (`zhangsan`,25)
+INSERT INTO node_table (name,age) VALUES (`zhangsan`,25)
 ```
 
 
 ### 更新数据
 
 ```js 
-    let data={
-        name:'zhangsan',
-        age:25
-    }
-    sql.table('node_table').data(data,true).update()
+let data={
+    name:'zhangsan',
+    age:25
+}
+sql.table('node_table').data(data,true).update()
 ```
 
 最终得到
 ```js
-    UPDATE node_table SET name=`zhangsan`,age=25
+UPDATE node_table SET name=`zhangsan`,age=25
 ```
 
 

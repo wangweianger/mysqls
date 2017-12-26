@@ -4,12 +4,12 @@ HAVING方法属于链式调用方法之一，用于配合group方法完成从分
 
 having方法只有一个参数，并且只能使用字符串，例如：
 ```js 
-    sql.table('node_table').group('user_id').where('id=1').select()
+sql.table('node_table').group('user_id').where('id=1').select()
 ```
 
 最终得到
 ```js
-    SELECT * FROM node_table WHERE id=1 GROUP BY user_id HAVING count(test_time)>3
+SELECT * FROM node_table WHERE id=1 GROUP BY user_id HAVING count(test_time)>3
 ```
 
 

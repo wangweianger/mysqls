@@ -4,40 +4,40 @@ UNION操作用于合并两个或多个 SELECT 语句的结果集。
 
 **UNION 字符串方式**
 ```js 
-    sql.union('SELECT name FROM think_user_1')
-       .union('SELECT name FROM think_user_2')
-       .select()
+sql.union('SELECT name FROM think_user_1')
+     .union('SELECT name FROM think_user_2')
+     .select()
 ```
 
 
 UNION 数组用法：
 ```js 
-    sql.union(['SELECT name FROM think_user_1','SELECT name FROM think_user_2']).select()
+sql.union(['SELECT name FROM think_user_1','SELECT name FROM think_user_2']).select()
 ```
 
 
 最终得到SQL
 ```js
-    (SELECT name FROM think_user_1) UNION (SELECT name FROM think_user_2)
+(SELECT name FROM think_user_1) UNION (SELECT name FROM think_user_2)
 ```
 
 
 **UNION ALL 字符串方式**
 ```js 
-    sql.union('SELECT name FROM think_user_1',true)
-       .union('SELECT name FROM think_user_2',true)
-       .select()
+sql.union('SELECT name FROM think_user_1',true)
+   .union('SELECT name FROM think_user_2',true)
+   .select()
 ```
 
 UNION ALL 数组用法
 ```js 
-    sql.union(['SELECT name FROM think_user_1','SELECT name FROM think_user_2'],true).select()
+sql.union(['SELECT name FROM think_user_1','SELECT name FROM think_user_2'],true).select()
 ```
 
 
 最终得到SQL
 ```js
-    (SELECT name FROM think_user_1) UNION ALL (SELECT name FROM think_user_2)
+(SELECT name FROM think_user_1) UNION ALL (SELECT name FROM think_user_2)
 ```
 
 
@@ -46,21 +46,21 @@ UNION ALL 数组用法
 
 **UNION ， UNION ALL 组合使用**
 ```js 
-    sql
-        .union('SELECT * FROM think_user_1',true)
-        .union('SELECT * FROM think_user_2',true)
-        .union(['SELECT * FROM think_user_3','SELECT name FROM think_user_4'])
-        .union('SELECT * FROM think_user_5',true)
-        .select()
+sql
+    .union('SELECT * FROM think_user_1',true)
+    .union('SELECT * FROM think_user_2',true)
+    .union(['SELECT * FROM think_user_3','SELECT name FROM think_user_4'])
+    .union('SELECT * FROM think_user_5',true)
+    .select()
 ```
 
 最终得到SQL
 ```js
-    (SELECT * FROM think_user_1) UNION ALL  
-    (SELECT * FROM think_user_2) UNION ALL 
-    (SELECT * FROM think_user_3) UNION 
-    (SELECT name FROM think_user_4)  UNION  
-    (SELECT * FROM think_user_5)
+(SELECT * FROM think_user_1) UNION ALL  
+(SELECT * FROM think_user_2) UNION ALL 
+(SELECT * FROM think_user_3) UNION 
+(SELECT name FROM think_user_4)  UNION  
+(SELECT * FROM think_user_5)
 ```
 
 

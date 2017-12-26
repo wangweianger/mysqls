@@ -30,53 +30,54 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 
 ** 查询 **
 ```
-调用：sql
-        .table('node_table')
-        .where('id=1')
-        .select()
-结果：SELECT * FROM node_table WHERE id=1
+sql
+    .table('node_table')
+    .where('id=1')
+    .select()
+    
+SELECT * FROM node_table WHERE id=1
 
 
-调用：sql
-        .table('node_table')
-        .field('id,name')
-        .where({id:1})
-        .select()
+sql
+    .table('node_table')
+    .field('id,name')
+    .where({id:1})
+    .select()
 
-结果：SELECT id,name FROM node_table WHERE id=1
+SELECT id,name FROM node_table WHERE id=1
 
 ```
 
 ** 插入 **
 ```
-调用：sql
-        .table('node_table')
-        .data('name=zane&email=752636052@qq.com')
-        .insert()
+sql
+    .table('node_table')
+    .data('name=zane&email=752636052@qq.com')
+    .insert()
 
-结果：INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
+INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
 
 ```
 
 ** 更新 **
 ```
-调用：sql
-        .table('node_table')
-        .data({name:'zane',email:'752636052@qq.com'},true)
-        .update()
+sql
+    .table('node_table')
+    .data({name:'zane',email:'752636052@qq.com'},true)
+    .update()
 
-结果：UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
+UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
 
 ```
 
 ** 删除 **
 ```js
-调用：sql
-        .table('user')
-        .where('name=`zane`')
-        .delet();
+sql
+    .table('user')
+    .where('name=`zane`')
+    .delet();
 
-结果：DELETE FROM user WHERE name=`zane`
+DELETE FROM user WHERE name=`zane`
     
     ......
 ```

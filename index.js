@@ -37,16 +37,19 @@ import sql from './src/main'
 //         id:1
 //     }
 
-let data={
-    name:'zane',
-    email:'752636052@qq.com',
-    sex:1
-}
+let data=[{
+        id:1,
+        name:'zane',
+        _nexttype:'or'
+    },{
+        sex:1,
+        address:'shenzheng'
+    }]
 
 console.log(sql
     .table('node_table')
-    .data(data)
-    .insert())
+    .where(data)
+    .select())
 
 // console.log(sql.table('node_table').where('id=1').select()) 
 

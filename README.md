@@ -190,7 +190,18 @@ sql
  * [**4.7.子查询**](/docs/advanced/childsearch.md)
 
 
+### 项目运行
+```
+git clone https://github.com/wangweianger/node-transform-mysql.git
+npm install
 
+//dve
+npm run dve
+
+//product
+npm run build
+
+```
 
 
 

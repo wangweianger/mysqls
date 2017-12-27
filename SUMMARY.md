@@ -31,5 +31,4 @@
   * [4.5.统计查询](/docs/advanced/tjsearch.md)
   * [4.6.SQL查询](/docs/advanced/sqlsearch.md)
   * [4.7.子查询](/docs/advanced/childsearch.md)
-* [node-transform-mysql](node-transform-mysql.md)
 

@@ -31,6 +31,7 @@ node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生
 ### 简单用法
 
 **查询**
+
 ```js
 sql
     .table('node_table')
@@ -47,10 +48,10 @@ sql
     .select()
 
 SELECT id,name FROM node_table WHERE id=1
-
 ```
 
 **插入**
+
 ```js
 sql
     .table('node_table')
@@ -58,10 +59,10 @@ sql
     .insert()
 
 INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
-
 ```
 
 **更新**
+
 ```js
 sql
     .table('node_table')
@@ -69,10 +70,10 @@ sql
     .update()
 
 UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
-
 ```
 
 **删除**
+
 ```js
 let data=[{
         id:1,
@@ -83,12 +84,12 @@ let data=[{
     }]
 
 DELETE FROM node_table WHERE name=`zane`
-    
 ```
 
-
 ### 高级用法
+
 **数据库的查询是最复杂的，因此高级用法主要针对于查询**
+
 ```js
 //参数json多字段
 sql
@@ -153,7 +154,6 @@ sql
 (SELECT * FROM think_user_3) UNION 
 (SELECT name FROM think_user_4)  UNION  
 (SELECT * FROM think_user_5)
-
 ```
 
 更多用法请查看详细文档
@@ -162,35 +162,35 @@ sql
 
 * [**1.简介**](/README.md)
 * [**2.链式操作**](/docs/chain/README.md)
- * [**2.1.WHERE**](/docs/chain/where.md)
- * [**2.2.TABLE**](/docs/chain/table.md)
- * [**2.3.ALIAS**](/docs/chain/alias.md)
- * [**2.4.DATA**](/docs/chain/data.md)
- * [**2.5.FIELD**](/docs/chain/field.md)
- * [**2.6.ORDER**](/docs/chain/order.md)
- * [**2.7.LIMIT**](/docs/chain/limit.md)
- * [**2.8.PAGE**](/docs/chain/page.md)
- * [**2.9.GROUP**](/docs/chain/group.md)
- * [**2.10.HAVING**](/docs/chain/having.md)
- * [**2.11.UNION**](/docs/chain/union.md)
- * [**2.12.DISTINCT**](/docs/chain/distinct.md)
- * [**2.13.COMMENT**](/docs/chain/comment.md)
+  * [**2.1.WHERE**](/docs/chain/where.md)
+  * [**2.2.TABLE**](/docs/chain/table.md)
+  * [**2.3.ALIAS**](/docs/chain/alias.md)
+  * [**2.4.DATA**](/docs/chain/data.md)
+  * [**2.5.FIELD**](/docs/chain/field.md)
+  * [**2.6.ORDER**](/docs/chain/order.md)
+  * [**2.7.LIMIT**](/docs/chain/limit.md)
+  * [**2.8.PAGE**](/docs/chain/page.md)
+  * [**2.9.GROUP**](/docs/chain/group.md)
+  * [**2.10.HAVING**](/docs/chain/having.md)
+  * [**2.11.UNION**](/docs/chain/union.md)
+  * [**2.12.DISTINCT**](/docs/chain/distinct.md)
+  * [**2.13.COMMENT**](/docs/chain/comment.md)
 * [**3.CURD调用**](/docs/curd/README.md)
- * [**3.1.SELECT**](/docs/curd/select.md)
- * [**3.2.UPDATE**](/docs/curd/update.md)
- * [**3.3.INSERT**](/docs/curd/insert.md)
- * [**3.4.DELETE**](/docs/curd/delete.md)
+  * [**3.1.SELECT**](/docs/curd/select.md)
+  * [**3.2.UPDATE**](/docs/curd/update.md)
+  * [**3.3.INSERT**](/docs/curd/insert.md)
+  * [**3.4.DELETE**](/docs/curd/delete.md)
 * [**4.查询方式**](/docs/advanced/README.md)
- * [**4.1.基本查询**](/docs/advanced/basesearch.md)
- * [**4.2.表达式查询**](/docs/advanced/bdssearch.md)
- * [**4.3.区间查询**](/docs/advanced/qjsearch.md)
- * [**4.4.组合查询**](/docs/advanced/zhsearch.md)
- * [**4.5.统计查询**](/docs/advanced/tjsearch.md)
- * [**4.6.SQL查询**](/docs/advanced/sqlsearch.md)
- * [**4.7.子查询**](/docs/advanced/childsearch.md)
-
+  * [**4.1.基本查询**](/docs/advanced/basesearch.md)
+  * [**4.2.表达式查询**](/docs/advanced/bdssearch.md)
+  * [**4.3.区间查询**](/docs/advanced/qjsearch.md)
+  * [**4.4.组合查询**](/docs/advanced/zhsearch.md)
+  * [**4.5.统计查询**](/docs/advanced/tjsearch.md)
+  * [**4.6.SQL查询**](/docs/advanced/sqlsearch.md)
+  * [**4.7.子查询**](/docs/advanced/childsearch.md)
 
 ### 项目运行
+
 ```
 git clone https://github.com/wangweianger/node-transform-mysql.git
 npm install
@@ -200,10 +200,7 @@ npm run dve
 
 //product
 npm run build
-
 ```
-
-
 
 
 

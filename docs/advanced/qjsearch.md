@@ -24,3 +24,4 @@ id:{neq:6,gt:3,_type:'or'}
 
 
 支持所有的表达式查询，更多请查看表达式查询
+ * [**4.2.表达式查询**](/docs/advanced/bdssearch.md)

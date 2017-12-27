@@ -39,16 +39,21 @@ import sql from './src/main'
 
 let data=[{
         id:1,
-        name:'zane',
+        name:'zhangsan',
+        status:{ neq:1,elt:10 },
         _nexttype:'or'
     },{
-        sex:1,
-        address:'shenzheng'
+      sex:1,
+      name:{in:'1,2,3'},
+       _type:'or' 
     }]
 
 console.log(sql
+    .count('id')
+    .min('score')
+    .max('score')
+    .field('id,name,score')
     .table('node_table')
-    .where(data)
     .select())
 
 // console.log(sql.table('node_table').where('id=1').select()) 

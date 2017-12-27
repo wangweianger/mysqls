@@ -201,34 +201,34 @@ export function comment(opt){
 
 export function count(opt){
     let optvalue = opt || 1
-    this.sqlObj.count = `count(${optvalue})`
+    this.sqlObj.count = `COUNT(${optvalue})`
     return this
 }
 
 export function max(opt){
     if(opt) {
-        this.sqlObj.max = `max(${optvalue})`
+        this.sqlObj.max = `MAX(${opt})`
     }
     return this
 }
 
 export function min(opt){
     if(opt) {
-        this.sqlObj.min = `min(${optvalue})`
+        this.sqlObj.min = `MIN(${opt})`
     }
     return this
 }
 
 export function avg(opt){
     if(opt) {
-        this.sqlObj.avg = `avg(${optvalue})`
+        this.sqlObj.avg = `AVG(${opt})`
     }
     return this
 }
 
 export function sum(opt){
     if(opt) {
-        this.sqlObj.sum = `sum(${optvalue})`
+        this.sqlObj.sum = `SUM(${opt})`
     }
     return this
 }

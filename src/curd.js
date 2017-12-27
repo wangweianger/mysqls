@@ -18,7 +18,7 @@ export function select(){
 
     let newSqlObj = sortSelectSql(this.sqlObj)
     newSqlObj.sortkeys.forEach(item=>{
-        if(item){
+        if(newSqlObj.result[item]){
             result = `${result} ${newSqlObj.result[item]}`
         }
     })

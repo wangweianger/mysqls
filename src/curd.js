@@ -1,7 +1,7 @@
 import {
-    sortSelectSql
+    sortSelectSql,
+    checkOptType
 } from './uitl'
-
 
 export function select(){
     let result = ''
@@ -24,21 +24,38 @@ export function select(){
     })
     this.sqlObj = {}
     return `SELECT ${result} `;
-    
 }
 
 export function update(){
-    let result = this.sqlObj.where ? 
-           `UPDATE ${this.sqlObj.table} SET ${this.sqlObj.data} WHERE ${this.sqlObj.where}` :
-           `UPDATE ${this.sqlObj.table} SET ${this.sqlObj.data}`
+    let result      = ''
+    let datastr     = ''
+    let newopt      = this.sqlObj.data
+    let keys        = Object.keys(newopt)
+    keys.forEach((item,index)=>{
+        datastr =  index==keys.length-1?
+                  `${datastr}${item}=${checkOptType(newopt[item])}`:
+                  `${datastr}${item}=${checkOptType(newopt[item])},`
+    })
+    result  = this.sqlObj.where ? 
+           `UPDATE ${this.sqlObj.table} SET ${datastr} WHERE ${this.sqlObj.where}` :
+           `UPDATE ${this.sqlObj.table} SET ${datastr}`
     this.sqlObj = {} 
     return result      
 }   
 
 export function insert(){
-   let result = `INSERT INTO ${this.sqlObj.table} ${this.sqlObj.data}`
-   this.sqlObj = {}
-   return result
+    let keys    =''
+    let values  =''
+    let newopt  = this.sqlObj.data
+    let datastr = ''
+    for(let key in newopt){
+        keys    = keys ? `${keys},${key}` : key
+        values  = values ? `${values},${checkOptType(newopt[key])}` : checkOptType(newopt[key])
+    }
+    datastr=`(${keys}) VALUES (${values})`
+    let result = `INSERT INTO ${this.sqlObj.table} ${datastr}`
+    this.sqlObj = {}
+    return result
 }
 
 export function delet(){

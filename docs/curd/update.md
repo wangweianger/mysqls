@@ -1,6 +1,6 @@
 update方法更新数据库中的数据，使用简单，语法简洁
 
-update方法 主要调用的是 data语法,data('xx',true),data第二个参数为true即表示更新
+update方法 主要调用的是 data语法,data('xx')
 最终调用 .updata() 方法
 
 ### 案例
@@ -9,7 +9,7 @@ update方法 主要调用的是 data语法,data('xx',true),data第二个参数�
 ```js 
 sql
     .table('node_table')
-    .data('name=zane&email=752636052@qq.com',true)
+    .data('name=zane&email=752636052@qq.com')
     .update()
 
 
@@ -31,7 +31,7 @@ let data={
 }
 sql
     .table('node_table')
-    .data(data,true)
+    .data(data)
     .update()
 
 ```

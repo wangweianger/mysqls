@@ -1,6 +1,6 @@
 insert方法用来在插入数据，使用简单，语法简洁
 
-insert方法 主要调用的是 data语法,data('xx'),data为一个参数
+insert方法 主要调用的是 data语法,data('xx')
 最终调用 .insert() 方法
 
 ### 案例

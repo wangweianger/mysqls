@@ -37,23 +37,27 @@ import sql from './src/main'
 //         id:1
 //     }
 
-let table = sql.field('id,name').table('node_table').group('field').select()
+// let table = sql.field('id,name').table('node_table').group('field').select()
 
 
-console.log(sql.table(table).group('field').where('id=1').order('status').select())
+// console.log(sql.table(table).group('field').where('id=1').order('status').select())
 
 // console.log(sql.table('node_table').where('id=1').select()) 
 
 // console.log(sql.table(`(${sql.table('user').where('id=2').select()})`).where('name=`zhangsan`').select()) 
 
-// let insertSql = sql.table('user').data('name=zane&email=752636052@qq.com').insert();
-// console.log(insertSql)
+let data={
+    name:'zane',
+    email:'752636052@qq.com'
+}
+let insertSql = sql.table('user').data(data).insert();
+console.log(insertSql)
 
-// let updateSql = sql
-//             .table('user')
-//             .data({name:'zane',email:'752636052@qq.com'},true)
-//             .update()
-// console.log(updateSql)
+let updateSql = sql
+            .table('user')
+            .data(data)
+            .update()
+console.log(updateSql)
 
 // let delSql = sql.table('user').where('name=`zane`').delet();
 // console.log(delSql)

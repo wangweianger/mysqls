@@ -4,7 +4,7 @@ node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生
 
 它所做的事情很简单也很专一，只负责生成sql语句，不执行任何的增删改查。
 
-API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。
+### API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档
 
 ### API文档地址：[https://wangweianger.gitbooks.io/node-transform-mysql/content/](https://wangweianger.gitbooks.io/node-transform-mysql/content/)
 
@@ -54,7 +54,7 @@ SELECT id,name FROM node_table WHERE id=1
 ```js
 sql
     .table('node_table')
-    .data('name=zane&email=752636052@qq.com')
+    .data({name:'zane',email:'752636052@qq.com'})
     .insert()
 
 INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
@@ -65,7 +65,7 @@ INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
 ```js
 sql
     .table('node_table')
-    .data({name:'zane',email:'752636052@qq.com'},true)
+    .data({name:'zane',email:'752636052@qq.com'})
     .update()
 
 UPDATE node_table SET name=`zane`,email=`752636052@qq.com`

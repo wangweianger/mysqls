@@ -9,7 +9,7 @@ node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生
 ### API文档地址：[https://wangweianger.gitbooks.io/node-transform-mysql/content/](https://wangweianger.gitbooks.io/node-transform-mysql/content/)
 
 ### 安装：
-
+不用担心它的体量大，整体代码300行左右，压缩之后代码不足8k
 首先通过 [npm](https://www.npmjs.com/) 安装：
 
 ```js

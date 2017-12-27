@@ -37,24 +37,10 @@ import sql from './src/main'
 //         id:1
 //     }
 
-let data=[{
-        id:1,
-        name:'zhangsan',
-        status:{ neq:1,elt:10 },
-        _nexttype:'or'
-    },{
-      sex:1,
-      name:{in:'1,2,3'},
-       _type:'or' 
-    }]
+let table = sql.field('id,name').table('node_table').group('field').select()
 
-console.log(sql
-    .count('id')
-    .min('score')
-    .max('score')
-    .field('id,name,score')
-    .table('node_table')
-    .select())
+
+console.log(sql.table(table).group('field').where('id=1').order('status').select())
 
 // console.log(sql.table('node_table').where('id=1').select()) 
 

@@ -7,6 +7,9 @@ import {
 
 //需要查询的table表  参数：String  案例：table('user')
 export function table(opt){
+    if(opt&&opt.indexOf('SELECT')!=-1){
+        opt = `(${opt})`
+    }
     if(opt) this.sqlObj.table = opt
     return this;
 } 

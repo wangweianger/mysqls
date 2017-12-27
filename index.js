@@ -1,7 +1,11 @@
 // import "babel-polyfill"
-require('babel-register')
+// require('babel-register')
 
-import sql from './src/main'
+// let sql = require('./build/main.js')
+import sql from './build/main.js'
+// console.log(sql)
+
+// import sql from './src/main'
 
 // let sqlstr = sql.table('user')  
 //             .field('id,name,class')

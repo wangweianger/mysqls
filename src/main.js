@@ -23,4 +23,4 @@ for(let key in sqljson){
     mysql.prototype[key]=sqljson[key].bind(newObj)
 }
 
-export default newObj
+module.exports = newObj

@@ -23,7 +23,7 @@ export function select(){
         }
     })
     this.sqlObj = {}
-    return `SELECT ${result} `;
+    return `SELECT ${result.replace(/'/g,'\'').replace(/`/g,'\'')} `;
 }
 
 export function update(){
@@ -40,7 +40,7 @@ export function update(){
            `UPDATE ${this.sqlObj.table} SET ${datastr} WHERE ${this.sqlObj.where}` :
            `UPDATE ${this.sqlObj.table} SET ${datastr}`
     this.sqlObj = {} 
-    return result      
+    return result.replace(/'/g,'\'').replace(/`/g,'\'')
 }   
 
 export function insert(){
@@ -55,7 +55,7 @@ export function insert(){
     datastr=`(${keys}) VALUES (${values})`
     let result = `INSERT INTO ${this.sqlObj.table} ${datastr}`
     this.sqlObj = {}
-    return result
+    return result.replace(/'/g,'\'').replace(/`/g,'\'')
 }
 
 export function delet(){
@@ -63,7 +63,7 @@ export function delet(){
            `DELETE FROM ${this.sqlObj.table} WHERE ${this.sqlObj.where}`:
            `DELETE FROM ${this.sqlObj.table}`
     this.sqlObj = {}
-    return result        
+    return result.replace(/'/g,'\'').replace(/`/g,'\'')
 }
 
 /*query输入sql查询

@@ -15,7 +15,7 @@ npm install node-transform-mysql --save-dev
 ```
 
 ### 参数说明
-```
+```js
 execute     ：执行单挑sql语句       参数：（config,sqlStr）
 sql         ：链式调用生成sql语句    链式调用语法，参考后文
 transaction ：执行事务相关任务时使用  参数：（config,sqlArr）
@@ -227,7 +227,7 @@ sql
 
 ### 项目运行
 
-```
+```js
 git clone https://github.com/wangweianger/node-transform-mysql.git
 npm install
 

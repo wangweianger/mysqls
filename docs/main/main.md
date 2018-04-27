@@ -1,6 +1,6 @@
 ###插件使用方式
 
-```
+```js
 //import方式
 import { execute,sql,transaction } from 'node-transform-mysql'
 
@@ -12,7 +12,7 @@ let { execute,sql,transaction } = require('node-transform-mysql')
 ### 参数说明
 
 **config配置**
-```
+```js
 let config={
     host:'localhost',
     user:'root',
@@ -32,7 +32,7 @@ let config={
 > 功能： 执行单个sql语句查询，并得到结果
 > 参数： （config,sqlStr） config为数据库配置参数，sqlStr查询的sql语句
 用法：
-```
+```js
 let sqlStr = sql.table('table1').where({id:1}).select()
 
 let result = await execute(config,sqlStr)

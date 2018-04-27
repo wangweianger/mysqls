@@ -7,6 +7,8 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 
 * gitbooks文档地址:https://wangweianger.gitbooks.io/mysqls/content/
 * npm地址：https://www.npmjs.com/package/mysqls
+* 使用插件项目，完整的前端性能监控系统：https://github.com/wangweianger/web-performance-monitoring-system
+
 
 ### 安装：
 

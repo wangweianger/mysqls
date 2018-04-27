@@ -2,7 +2,7 @@
 
 node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
 
-它所做的事情很简单也很专一，只负责生成sql语句，不执行任何的增删改查。
+插件本身只负责生成sql语句，不执行任何的增删改查,增删改查交给mysql2。
 
 ### API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档
 
@@ -158,7 +158,7 @@ sql
 
 
 ## 项目使用：
-```let 
+```js 
   import { execute,sql } from 'node-transform-mysql'
 ```
 
@@ -205,7 +205,14 @@ sql
 
 ```
 
-
+### ERROR 数据报错
+```
+操作数据库若报错，返回如下json
+{
+  code:-999,
+  err:err
+}
+```
 
 更多用法请查看详细文档
 

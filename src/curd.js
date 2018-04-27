@@ -74,9 +74,6 @@ export function query(opt){
     return opt?opt:'';
 }
  
- 
-
-
 
 
 

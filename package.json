@@ -11,6 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/wangweianger/node-transform-mysql.git"
   },
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 4.2.0"
+  },
   "author": "",
   "license": "ISC",
   "homepage": "http://blog.seosiwei.com/",

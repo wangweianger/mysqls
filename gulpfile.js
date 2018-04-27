@@ -7,10 +7,8 @@ const rename = require('gulp-rename')
 gulp.task('build', () =>
     gulp.src('./src/*.js')
     .pipe(babel({
-        presets: ['env'],
-        plugins: ["syntax-dynamic-import","transform-object-rest-spread",["transform-es2015-modules-commonjs", {
-      "allowTopLevelThis": true
-    }]]
+        presets: ['env','es2015'],
+        plugins: ["transform-runtime"]
     }))
     .pipe(uglify())
     //.pipe(rename('zane-calendar.min.js'))

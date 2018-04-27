@@ -75,13 +75,9 @@ UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
 **删除**
 
 ```js
-let data=[{
-        id:1,
-        name:'zane'
-    },{
-        sex:1,
-        address:'shenzheng'
-    }]
+sql .table('node_table')
+    .where({name:'zane'})
+    .delet();
 
 DELETE FROM node_table WHERE name=`zane`
 ```

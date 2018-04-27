@@ -1,11 +1,12 @@
-// import "babel-polyfill"
-// require('babel-register')
+import "babel-polyfill"
+require('babel-register')
 
 // let sql = require('./build/main.js')
-import sql from './build/main.js'
+// import sql from './build/main.js'
 // console.log(sql)
 
-// import sql from './src/main'
+import sql from './src/main'
+
 
 // let sqlstr = sql.table('user')  
 //             .field('id,name,class')
@@ -50,18 +51,22 @@ import sql from './build/main.js'
 
 // console.log(sql.table(`(${sql.table('user').where('id=2').select()})`).where('name=`zhangsan`').select()) 
 
-let data={
-    name:'zane',
-    email:'752636052@qq.com'
-}
-let insertSql = sql.table('user').data(data).insert();
-console.log(insertSql)
+// let data={
+//     name:'zane',
+//     email:'752636052@qq.com'
+// }
+// let insertSql = sql.table('user').data(data).insert();
+// console.log(insertSql)
 
-let updateSql = sql
-            .table('user')
-            .data(data)
-            .update()
-console.log(updateSql)
+// let updateSql = sql
+//             .table('user')
+//             .data(data)
+//             .update()
+// console.log(updateSql)
+
+// let sqlstring = sql.table('node_table').group('user_id').where('id=1').having('count(number)>3').select()
+
+// console.log(sqlstring)
 
 // let delSql = sql.table('user').where('name=`zane`').delet();
 // console.log(delSql)

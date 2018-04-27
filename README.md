@@ -1,50 +1,86 @@
-# [node-transform-mysql文档](https://wangweianger.gitbooks.io/node-transform-mysql/content/)
+
 
 node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
+插件本身只负责生成sql语句，不执行任何的增删改查,增删改查交给mysql。
 
-插件本身只负责生成sql语句，不执行任何的增删改查,增删改查交给mysql2。
+API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档
 
-### API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档
-
-### API文档地址：[https://wangweianger.gitbooks.io/node-transform-mysql/content/](https://wangweianger.gitbooks.io/node-transform-mysql/content/)
+gitbooks文档地址:https://wangweianger.gitbooks.io/node-transform-mysql/content/
+npm地址：https://www.npmjs.com/package/node-transform-mysql
 
 ### 安装：
-不用担心它的体量大，整体代码300行左右，压缩之后代码不足8k
-首先通过 [npm](https://www.npmjs.com/package/node-transform-mysql) 安装：
 
 ```js
-    npm install node-transform-mysql
+npm install node-transform-mysql --save-dev
 ```
 
-然后使用一个支持 CommonJS 或 ES2015 的模块管理器，例如 webpack：
+### 参数说明
+```
+execute     ：执行单挑sql语句       参数：（config,sqlStr）
+sql         ：链式调用生成sql语句    链式调用语法，参考后文
+transaction ：执行事务相关任务时使用  参数：（config,sqlArr）
+```
 
+### 项目使用：
+```js 
+//import方式
+import { execute,sql,transaction } from 'node-transform-mysql'
+
+//require方式
+let { execute,sql,transaction } = require('node-transform-mysql')
+```
+
+### 定义一个公共的config配置
 ```js
-    // 使用 import，如 babel
-    import { execute,sql } from 'node-transform-mysql'
+let config={
+    host:'localhost',
+    user:'root',
+    password:'123456',
+    database:'web-performance',
+    port:'3306',
+}
 
-    // 不使用 import
-    let { execute,sql } = require('node-transform-mysql')
-    或
-    let mysql = require('node-transform-mysql')
-    execute = mysql.execute
-    sql = mysql.sql
 ```
 
-### sql调用方法的顺序内部已经做了排序，因此可以不按严格的sql语句顺序来写
+### 使用Promise方式
+```js
+//使用
+let sqlstr = sql.table('web_pages').where({id:147}).select()
 
-### 简单用法
+execute(config,sqlstr).then(res=>{
+      console.log(res)
+}).catch(err=>{
+    console.log(err)
+})
 
+```
+
+### 使用async/await
+```js
+let sqlstr = sql.table('web_pages').where({id:147}).select()
+
+let result = await execute(config,sqlstr)
+console.log(result)
+
+```
+
+
+### 处理事务
+```js
+let tranSqlArr = [
+    sql.table('table1').data({number:number-5}).update(),
+    sql.table('table2').data({number:number+5}).update()
+]
+let result = await transaction(config,tranSqlArr)
+console.log(result) 
+
+```
+
+### 生成sql语句简单用法
+备注：sql调用方法的顺序内部已经做了排序，因此可以不按严格的sql语句顺序来写
 **查询**
 
 ```js
-sql
-    .table('node_table')
-    .where('id=1')
-    .select()
-
-SELECT * FROM node_table WHERE id=1
-
-
 sql
     .table('node_table')
     .field('id,name')
@@ -86,9 +122,7 @@ sql .table('node_table')
 DELETE FROM node_table WHERE name=`zane`
 ```
 
-### 高级用法
-
-**数据库的查询是最复杂的，因此高级用法主要针对于查询**
+### 生成sql语句高级用法
 
 ```js
 //参数json多字段
@@ -157,68 +191,12 @@ sql
 ```
 
 
-## 项目使用：
-```js 
-  import { execute,sql } from 'node-transform-mysql'
-```
-
-### 使用Promise方式
-```js
-//数据库相关配置
-  let config={
-      host:'localhost',
-      user:'root',
-      password:'123456',
-      database:'web-performance',
-      port:'3306',
-  }
-
-  //使用
-  let sqlstr = sql.table('web_pages').where({id:147}).select()
-
-  execute(config,sqlstr).then(res=>{
-      console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  })
-
-```
-
-### 使用async/await
-```js
-  async function main(sqlstring){
-    let config={
-      host:'localhost',
-      user:'root',
-      password:'123456',
-      database:'web-performance',
-      port:'3306',
-    }
-    return await execute(config,sqlstring)
-  }
-
-
-  //使用
-  let sqlstring = sql.table('web_pages').where({id:147}).select()
-  let result = await getSqlResult(sqlstring)
-  console.log(result)
-
-```
-
-### ERROR 数据报错
-```
-操作数据库若报错，返回如下json
-{
-  code:-999,
-  err:err
-}
-```
-
 更多用法请查看详细文档
 
 ## 文档目录
 
 * [**1.简介**](/README.md)
+  * [**1.1.参数说明与事务**](/docs/main/main.md)
 * [**2.链式操作**](/docs/chain/README.md)
   * [**2.1.WHERE**](/docs/chain/where.md)
   * [**2.2.TABLE**](/docs/chain/table.md)

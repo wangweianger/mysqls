@@ -1,6 +1,7 @@
 ## 文档目录
 
 * [**1.简介**](/README.md)
+ * [**1.1.参数说明与事务**](/docs/main/main.md)
 * [**2.链式操作**](/docs/chain/README.md)
  * [**2.1.WHERE**](/docs/chain/where.md)
  * [**2.2.TABLE**](/docs/chain/table.md)

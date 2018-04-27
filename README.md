@@ -1,17 +1,26 @@
 
 
-node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
+mysqls是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
 插件本身只负责生成sql语句，不执行任何的增删改查,增删改查交给mysql。
 
 API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档
 
-gitbooks文档地址:https://wangweianger.gitbooks.io/node-transform-mysql/content/
-npm地址：https://www.npmjs.com/package/node-transform-mysql
+* gitbooks文档地址:https://wangweianger.gitbooks.io/mysqls/content/
+* npm地址：https://www.npmjs.com/package/mysqls
 
 ### 安装：
 
 ```js
-npm install node-transform-mysql --save-dev
+npm install mysqls --save-dev
+```
+
+### 项目使用：
+```js 
+//import方式
+import { execute,sql,transaction } from 'mysqls'
+
+//require方式
+let { execute,sql,transaction } = require('mysqls')
 ```
 
 ### 参数说明
@@ -21,14 +30,6 @@ sql         ：链式调用生成sql语句    链式调用语法，参考后文
 transaction ：执行事务相关任务时使用  参数：（config,sqlArr）
 ```
 
-### 项目使用：
-```js 
-//import方式
-import { execute,sql,transaction } from 'node-transform-mysql'
-
-//require方式
-let { execute,sql,transaction } = require('node-transform-mysql')
-```
 
 ### 定义一个公共的config配置
 ```js
@@ -228,7 +229,7 @@ sql
 ### 项目运行
 
 ```js
-git clone https://github.com/wangweianger/node-transform-mysql.git
+git clone https://github.com/wangweianger/mysqls.git
 npm install
 
 //dve

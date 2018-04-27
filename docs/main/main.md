@@ -2,10 +2,10 @@
 
 ```js
 //import方式
-import { execute,sql,transaction } from 'node-transform-mysql'
+import { execute,sql,transaction } from 'mysqls'
 
 //require方式
-let { execute,sql,transaction } = require('node-transform-mysql')
+let { execute,sql,transaction } = require('mysqls')
 ```
 
 

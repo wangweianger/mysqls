@@ -32,56 +32,6 @@ node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生
 
 ### sql调用方法的顺序内部已经做了排序，因此可以不按严格的sql语句顺序来写
 
-
-### 引入mysql2 项目开发你可以这样使用
-```let 
-  import { execute,sql } from 'node-transform-mysql'
-```
-
-### 使用Promise方式
-```js
-//数据库相关配置
-  let config={
-      host:'localhost',
-      user:'root',
-      password:'123456',
-      database:'web-performance',
-      port:'3306',
-  }
-
-  //使用
-  let sqlstr = sql.table('web_pages').where({id:147}).select()
-
-  execute(config,sqlstr).then(res=>{
-      console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  })
-
-```
-
-### 使用async/await
-```js
-  async function main(sqlstring){
-    let config={
-      host:'localhost',
-      user:'root',
-      password:'123456',
-      database:'web-performance',
-      port:'3306',
-    }
-    return await execute(config,sqlstring)
-  }
-
-
-  //使用
-  let sqlstring = sql.table('web_pages').where({id:147}).select()
-  let result = await getSqlResult(sqlstring)
-  console.log(result)
-  
-```
-
-
 ### 简单用法
 
 **查询**
@@ -205,6 +155,57 @@ sql
 (SELECT name FROM think_user_4)  UNION  
 (SELECT * FROM think_user_5)
 ```
+
+
+## 项目使用：
+```let 
+  import { execute,sql } from 'node-transform-mysql'
+```
+
+### 使用Promise方式
+```js
+//数据库相关配置
+  let config={
+      host:'localhost',
+      user:'root',
+      password:'123456',
+      database:'web-performance',
+      port:'3306',
+  }
+
+  //使用
+  let sqlstr = sql.table('web_pages').where({id:147}).select()
+
+  execute(config,sqlstr).then(res=>{
+      console.log(res)
+  }).catch(err=>{
+    console.log(err)
+  })
+
+```
+
+### 使用async/await
+```js
+  async function main(sqlstring){
+    let config={
+      host:'localhost',
+      user:'root',
+      password:'123456',
+      database:'web-performance',
+      port:'3306',
+    }
+    return await execute(config,sqlstring)
+  }
+
+
+  //使用
+  let sqlstring = sql.table('web_pages').where({id:147}).select()
+  let result = await getSqlResult(sqlstring)
+  console.log(result)
+
+```
+
+
 
 更多用法请查看详细文档
 

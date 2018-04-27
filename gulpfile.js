@@ -11,7 +11,6 @@ gulp.task('build', () =>
         plugins: ["transform-runtime"]
     }))
     .pipe(uglify())
-    //.pipe(rename('zane-calendar.min.js'))
     .pipe(gulp.dest('./build'))
 ); 
 gulp.task('default', ['build']);

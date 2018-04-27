@@ -19,14 +19,68 @@ node-transform-mysql是在node.js场景中使用mysql，根据传入的参数生
 然后使用一个支持 CommonJS 或 ES2015 的模块管理器，例如 webpack：
 
 ```js
-    // 使用 ES6 的转译器，如 babel
-    import sql from node-transform-mysql
+    // 使用 import，如 babel
+    import { execute,sql } from 'node-transform-mysql'
 
-    // 不使用 ES6 的转译器
-    var sql = require('node-transform-mysql')
+    // 不使用 import
+    let { execute,sql } = require('node-transform-mysql')
+    或
+    let mysql = require('node-transform-mysql')
+    execute = mysql.execute
+    sql = mysql.sql
 ```
 
 ### sql调用方法的顺序内部已经做了排序，因此可以不按严格的sql语句顺序来写
+
+
+### 引入mysql2 项目开发你可以这样使用
+```let 
+  import { execute,sql } from 'node-transform-mysql'
+```
+
+### 使用Promise方式
+```js
+//数据库相关配置
+  let config={
+      host:'localhost',
+      user:'root',
+      password:'123456',
+      database:'web-performance',
+      port:'3306',
+  }
+
+  //使用
+  let sqlstr = sql.table('web_pages').where({id:147}).select()
+
+  execute(config,sqlstr).then(res=>{
+      console.log(res)
+  }).catch(err=>{
+    console.log(err)
+  })
+
+```
+
+### 使用async/await
+```js
+  async function main(sqlstring){
+    let config={
+      host:'localhost',
+      user:'root',
+      password:'123456',
+      database:'web-performance',
+      port:'3306',
+    }
+    return await execute(config,sqlstring)
+  }
+
+
+  //使用
+  let sqlstring = sql.table('web_pages').where({id:147}).select()
+  let result = await getSqlResult(sqlstring)
+  console.log(result)
+  
+```
+
 
 ### 简单用法
 

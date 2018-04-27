@@ -1,5 +1,3 @@
-// require('babel-polyfill')
-// require('babel-register')
 
 let {execute,sql} = require('./build/main.js')
 async function getSqlResult(sqlstring){

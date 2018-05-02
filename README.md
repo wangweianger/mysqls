@@ -3,9 +3,9 @@
 mysqls是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
 插件本身只负责生成sql语句，不执行任何的增删改查,增删改查交给mysql。  
 
-API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档
+API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档 
 
-* gitbooks文档地址:https://wangweianger.gitbooks.io/mysqls/content/
+* gitbooks文档地址:https://wangweianger.gitbooks.io/mysqls/content/ 
 * npm地址：https://www.npmjs.com/package/mysqls
 * 使用插件项目，完整的前端性能监控系统：https://github.com/wangweianger/web-performance-monitoring-system
 

@@ -13,7 +13,7 @@ API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了
 ### 安装：
 
 ```js
-npm install mysqls --save-dev
+npm install mysqls --save-dev 
 ```
 
 ### 项目使用：

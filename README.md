@@ -117,7 +117,7 @@ UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
 ```
 
 **删除**
-
+ 
 ```js
 sql .table('node_table')
     .where({name:'zane'})

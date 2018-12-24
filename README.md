@@ -1,82 +1,109 @@
+# mysqls
+It is written in JavaScript,crud for mysql.You can also use transactions very easily.
 
+mysqls专为node.js开发的一款mysql语句生成插件，链式调用，使用灵活。支持生成sql语法，也支持生成语法之后直接调用，支持事物等特性。
+API参考很流行的ThinkPHP模型API。
 
-mysqls是在node.js场景中使用mysql，根据传入的参数生成相应的sql语句。
-插件本身只负责生成sql语句，不执行任何的增删改查,增删改查交给mysql。
-
-API参考很流行的ThinkPHP模型API，因为它已经做够流行和好用了。非常感谢ThinkPHP文档，很多案例参考其文档 
-
-* gitbooks文档地址:https://wangweianger.gitbooks.io/mysqls/content/ 
 * npm地址：https://www.npmjs.com/package/mysqls
-* 使用插件项目，完整的前端性能监控系统：https://github.com/wangweianger/web-performance-monitoring-system
 
-
-### 安装： 
-
+## 安装： 
 ```js 
 npm install mysqls --save-dev 
 ```
 
-### 项目使用：
+## mysqls参数说明
+>  * init          sql初始化API
+>  * exec          执行sql语句
+>  * sql           链式调用生成sql语句，支持生成后直接执行sql语句
+>  * transaction   执行事务API
+
+## 项目使用：
 ```js 
 //import方式
-import { execute,sql,transaction } from 'mysqls'
+import { init, exec, sql, transaction } from 'mysqls'
 
 //require方式
-let { execute,sql,transaction } = require('mysqls')
+let { init, exec, sql, transaction } = require('mysqls')
 ```
 
-### 参数说明
+## mysql配置初始化：
 ```js
-execute     ：执行单条sql语句       参数：（config,sqlStr）
-sql         ：链式调用生成sql语句    链式调用语法，参考后文
-transaction ：执行事务相关任务时使用  参数：（config,sqlArr）
+// 可在项目的启动时初始化配置
+init({
+    host: 'localhost',
+	user: 'root',
+	password:'123456',
+    database: 'test',
+    port: 3306,
+})
 ```
 
+### init 参数说明
+> * ispool           是否以连接池的方式初始化 (default:true)
+> * host             host地址  (default:'127.0.0.1')
+> * user             用户名 (default:'root')
+> * password         数据库密码  (default:'root')
+> * database         使用的数据库  (default:'test')
+> * port             端口  (default:'3306')
+> * waitConnection   是否等待链接(连接池时使用)  (default:true)   
+> * connectionLimit  连接池大小   (default:10)   
+> * queueLimit       排队限制   (default:0)   
 
-### 定义一个公共的config配置
+### 只生成sql语句案例
 ```js
-let config={
-    host:'localhost',
-    user:'root',
-    password:'123456',
-    database:'web-performance',
-    port:'3306',
-}
-
+sql.table('node_table').field('id,name').where({id:1}).select()
+SELECT id,name FROM node_table WHERE id=1
 ```
+
+### 使用exec函数执行sql语句
+```js
+const sqlstr = sql.table('node_table').field('id,name').where({id:1}).select()
+const result = await exec(sqlstr);
+```
+
+### 使用sql.prototype.exec链式调用
+```js
+const result = sql.table('node_table').field('id,name').where({id:1}).select(true).exec()
+```
+* 链式调用执行sql时select方法需要传参数:true
+* 同样适合update(true),insert(true),delet(true),query(true)方法
 
 ### 使用Promise方式
 ```js
-//使用
-let sqlstr = sql.table('web_pages').where({id:147}).select()
+//使用 exec 函数
+exec( sql.table('web_pages').where({id:147}).select() )
+    .then(res=>{
+        console.log(res)
+    }).catch(err=>{
+        console.log(err)
+    })
 
-execute(config,sqlstr).then(res=>{
-      console.log(res)
-}).catch(err=>{
-    console.log(err)
-})
-
+// 使用 exec 方法
+sql.table('web_pages').where({id:147}).select(true)
+    .then(res=>{
+        console.log(res)
+    }).catch(err=>{
+        console.log(err)
+    })
 ```
 
 ### 使用async/await
 ```js
-let sqlstr = sql.table('web_pages').where({id:147}).select()
+//使用 exec 函数
+const result = await exec(sql.table('web_pages').where({id:147}).select())
 
-let result = await execute(config,sqlstr)
-console.log(result)
-
+// 使用 exec 方法
+const result = await sql.table('web_pages').where({id:147}).select(true).exec()
 ```
 
 
 ### 处理事务
 ```js
-let tranSqlArr = [
-    sql.table('table1').data({number:number-5}).update(),
-    sql.table('table2').data({number:number+5}).update()
+const tranSqlArr = [
+    sql.table('table1').data({number:'number-5'}).update(),
+    sql.table('table2').data({number:'number+5'}).update()
 ]
-let result = await transaction(config,tranSqlArr)
-console.log(result) 
-
+const result = await transaction(tranSqlArr)
 ```
 
 ### 生成sql语句简单用法
@@ -192,8 +219,8 @@ sql
 (SELECT * FROM think_user_3) UNION 
 (SELECT name FROM think_user_4)  UNION  
 (SELECT * FROM think_user_5)
-```
 
+```
 
 更多用法请查看详细文档
 
@@ -229,18 +256,6 @@ sql
   * [**4.6.SQL查询**](/docs/advanced/sqlsearch.md)
   * [**4.7.子查询**](/docs/advanced/childsearch.md)
 
-### 项目运行 
-
-```js
-git clone https://github.com/wangweianger/mysqls.git
-npm install
-
-//dve
-npm run dve
-
-//product
-npm run build
-```
 
 
 

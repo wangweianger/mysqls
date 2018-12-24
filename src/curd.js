@@ -86,8 +86,13 @@ export function delet(type = false){
   参数为 String
   案例： query('SELECT * FROM user_name')
 */
-export function query(opt){
-    return opt?opt:'';
+export function query(opt, type = false){
+    opt = opt ? opt : '';
+    if (type) {
+        this.sqlObj.sqlStr = opt; return this;
+    } else {
+        return opt;
+    }
 }
  
 

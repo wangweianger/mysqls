@@ -31,8 +31,8 @@ let { init, exec, sql, transaction } = require('mysqls')
 // 可在项目的启动时初始化配置
 init({
     host: 'localhost',
-	user: 'root',
-	password:'123456',
+    user: 'root',
+    password:'123456',
     database: 'test',
     port: 3306,
 })

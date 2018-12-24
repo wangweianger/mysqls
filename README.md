@@ -12,10 +12,10 @@ npm install mysqls --save-dev
 ```
 
 ## mysqls参数说明
->  * init          sql初始化API
->  * exec          执行sql语句
->  * sql           链式调用生成sql语句，支持生成后直接执行sql语句
->  * transaction   执行事务API
+>  * init:          sql初始化API
+>  * exec:          执行sql语句
+>  * sql:           链式调用生成sql语句，支持生成后直接执行sql语句
+>  * transaction:   执行事务API
 
 ## 项目使用：
 ```js 
@@ -39,15 +39,15 @@ init({
 ```
 
 ### init 参数说明
-> * ispool           是否以连接池的方式初始化 (default:true)
-> * host             host地址  (default:'127.0.0.1')
-> * user             用户名 (default:'root')
-> * password         数据库密码  (default:'root')
-> * database         使用的数据库  (default:'test')
-> * port             端口  (default:'3306')
-> * waitConnection   是否等待链接(连接池时使用)  (default:true)   
-> * connectionLimit  连接池大小   (default:10)   
-> * queueLimit       排队限制   (default:0)   
+> * ispool:           是否以连接池的方式初始化 (default:true)
+> * host:             host地址  (default:'127.0.0.1')
+> * user:             用户名 (default:'root')
+> * password:         数据库密码  (default:'root')
+> * database:         使用的数据库  (default:'test')
+> * port:             端口  (default:'3306')
+> * waitConnection:   是否等待链接(连接池时使用)  (default:true)   
+> * connectionLimit:  连接池大小   (default:10)   
+> * queueLimit:       排队限制   (default:0)   
 
 ### 只生成sql语句案例
 ```js

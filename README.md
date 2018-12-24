@@ -51,19 +51,33 @@ init({
 
 ### 只生成sql语句案例
 ```js
-sql.table('node_table').field('id,name').where({id:1}).select()
+sql
+    .table('node_table')
+    .field('id,name')
+    .where({id:1})
+    .select()
+// 执行结果
 SELECT id,name FROM node_table WHERE id=1
 ```
 
 ### 使用exec函数执行sql语句
 ```js
-const sqlstr = sql.table('node_table').field('id,name').where({id:1}).select()
+const sqlstr = sql
+    .table('node_table')
+    .field('id,name')
+    .where({id:1})
+    .select();
 const result = await exec(sqlstr);
 ```
 
 ### 使用sql.prototype.exec链式调用
 ```js
-const result = sql.table('node_table').field('id,name').where({id:1}).select(true).exec()
+const result = sql
+    .table('node_table')
+    .field('id,name')
+    .where({id:1})
+    .select(true)
+    .exec();
 ```
 * 链式调用执行sql时select方法需要传参数:true
 * 同样适合update(true),insert(true),delet(true),query(true)方法

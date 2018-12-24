@@ -3,7 +3,7 @@ import {
     checkOptType
 } from './uitl'
 
-export function select(){
+export function select(type=false){
     let result = ''
     if(this.sqlObj.union){
         result = this.sqlObj.union
@@ -22,11 +22,15 @@ export function select(){
             result = `${result} ${newSqlObj.result[item]}`
         }
     })
-    this.sqlObj = {}
-    return `SELECT ${result.replace(/'/g,'\'').replace(/`/g,'\'')} `;
+    const sqlStr = `SELECT ${result.replace(/'/g, '\'').replace(/`/g, '\'')} `;
+    if (type){
+        this.sqlObj.sqlStr = sqlStr; return this;
+    } else {
+        this.sqlObj = {}; return sqlStr;
+    }
 }
 
-export function update(){
+export function update(type = false){
     let result      = ''
     let datastr     = ''
     let newopt      = this.sqlObj.data
@@ -39,11 +43,15 @@ export function update(){
     result  = this.sqlObj.where ? 
            `UPDATE ${this.sqlObj.table} SET ${datastr} WHERE ${this.sqlObj.where}` :
            `UPDATE ${this.sqlObj.table} SET ${datastr}`
-    this.sqlObj = {} 
-    return result.replace(/'/g,'\'').replace(/`/g,'\'')
+    const sqlStr = result.replace(/'/g, '\'').replace(/`/g, '\'');
+    if (type) {
+        this.sqlObj.sqlStr = sqlStr; return this;
+    } else {
+        this.sqlObj = {}; return sqlStr;
+    }
 }   
 
-export function insert(){
+export function insert(type = false){
     let keys    =''
     let values  =''
     let newopt  = this.sqlObj.data
@@ -54,16 +62,24 @@ export function insert(){
     }
     datastr=`(${keys}) VALUES (${values})`
     let result = `INSERT INTO ${this.sqlObj.table} ${datastr}`
-    this.sqlObj = {}
-    return result.replace(/'/g,'\'').replace(/`/g,'\'')
+    const sqlStr = result.replace(/'/g, '\'').replace(/`/g, '\'')
+    if (type) {
+        this.sqlObj.sqlStr = sqlStr; return this;
+    } else {
+        this.sqlObj = {}; return sqlStr;
+    }
 }
 
-export function delet(){
+export function delet(type = false){
     let result = this.sqlObj.where ?
            `DELETE FROM ${this.sqlObj.table} WHERE ${this.sqlObj.where}`:
            `DELETE FROM ${this.sqlObj.table}`
-    this.sqlObj = {}
-    return result.replace(/'/g,'\'').replace(/`/g,'\'')
+    const sqlStr = result.replace(/'/g, '\'').replace(/`/g, '\'')
+    if (type) {
+        this.sqlObj.sqlStr = sqlStr; return this;
+    } else {
+        this.sqlObj = {}; return sqlStr;
+    }
 }
 
 /*query输入sql查询

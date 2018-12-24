@@ -66,7 +66,7 @@ export function checkOptType(opt){
     let result
     switch(Object.prototype.toString.call(opt)){
         case "[object String]":
-            result = '`'+opt+'`'
+            result = opt
             break;
         case "[object Boolean]": case "[object Number]":
             result = opt

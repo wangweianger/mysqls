@@ -5,7 +5,9 @@ require('babel-register')
 // import sql from './build/main.js'
 // console.log(sql)
 
-import sql from './src/main'
+import mysql,{sql} from './src/main'
+
+console.log(mysql)
 
 
 // let sqlstr = sql.table('user')  
@@ -34,6 +36,7 @@ import sql from './src/main'
 // let sqlstr = sql.table('user')
 //             .where({id:1,name:'wangwei'})
 //             .select();
+
 
 // let sqlstr = sql.table('user')
 //             .where({id:{ eq:2,egt:10,_type:'or'}})
@@ -64,13 +67,13 @@ import sql from './src/main'
 //             .update()
 // console.log(updateSql)
 
-// let sqlstring = sql.table('node_table').group('user_id').where('id=1').having('count(number)>3').select()
+let sqlstring = sql.table('node_table').group('user_id').where('id=1').having('count(number)>3').select()
 
-// console.log(sqlstring)
+console.log(sqlstring)
 
 // let delSql = sql.table('user').where('name=`zane`').delet();
 // console.log(delSql)
 
-//SELECT * FROM user where type=1 AND status=1
+
 
 

@@ -36,7 +36,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^3.0.0",
-    "mysql2": "^1.5.3",
+    "mysql2": "^1.6.4",
     "symbol-observable": "^1.1.0"
   },
   "dependencies": {

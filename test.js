@@ -1,5 +1,7 @@
 
-let { init, exec, sql, transaction } = require('./build/main.js')
+
+// let { init, exec, sql, transaction } = require('./build/main.js')
+let { init, exec, sql, transaction } = require('mysqls')
 
 async function run(){
 

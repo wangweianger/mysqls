@@ -1,4 +1,4 @@
-### EN(/README.md) | CN(/README-CN.md)
+### [EN](/README.md) | [CN](/README-CN.md)
 
 # mysqls
 It is written in JavaScript,crud for mysql.You can also use transactions very easily.

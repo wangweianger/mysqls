@@ -1,4 +1,4 @@
-### 英文文档(/README.md) | 中文文档(/README-CN.md)
+### [英文文档](/README.md) | [中文文档](/README-CN.md)
 
 # mysqls
 It is written in JavaScript,crud for mysql.You can also use transactions very easily.

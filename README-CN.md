@@ -1,35 +1,36 @@
-### EN(/README.md) | CN(/README-CN.md)
+### 英文文档(/README.md) | 中文文档(/README-CN.md)
 
 # mysqls
 It is written in JavaScript,crud for mysql.You can also use transactions very easily.
 
-mysqls：A plug-in that generates SQL statements for node.js. call chaining .simple to use. support transaction.
+mysqls 一款专为node.js生成sql语句的插件，链式调用，使用灵活。支持生成sql语法，也支持生成语法之后直接调用，支持事物等特性。
+API参考很流行的ThinkPHP模型API。
 
-* npm address：https://www.npmjs.com/package/mysqls
+* npm地址：https://www.npmjs.com/package/mysqls
 
-## install： 
+## 安装： 
 ```js 
 npm install mysqls --save-dev 
 ```
 
-## mysqls parameters
->  * init:          sql Initialization
->  * exec:          Executing SQL statements
->  * sql:           Chain Call Generates SQL Statement
->  * transaction:   transaction API
+## mysqls参数说明
+>  * init:          sql初始化API
+>  * exec:          执行sql语句
+>  * sql:           链式调用生成sql语句，支持生成后直接执行sql语句
+>  * transaction:   执行事务API
 
-## Use：
+## 项目使用：
 ```js 
-//import
+//import方式
 import { init, exec, sql, transaction } from 'mysqls'
 
-//require
+//require方式
 let { init, exec, sql, transaction } = require('mysqls')
 ```
 
-## Config initialization：
+## mysql配置初始化：
 ```js
-// You can initialize the configuration at project startup
+// 可在项目的启动时初始化配置
 init({
     host: 'localhost',
     user: 'root',
@@ -39,18 +40,18 @@ init({
 })
 ```
 
-### init configs
-> * ispool:           Is it initialized as a connection pool. (default:true)
-> * host:             host address. (default:'127.0.0.1')
-> * user:             user. (default:'root')
-> * password:         password.  (default:'root')
-> * database:         database.  (default:'test')
-> * port:             port.  (default:'3306')
-> * waitConnection:   wait for connections.  (default:true)   
-> * connectionLimit:  connection limit.   (default:10)   
-> * queueLimit:       queue limit.   (default:0)   
+### init 参数说明
+> * ispool:           是否以连接池的方式初始化 (default:true)
+> * host:             host地址  (default:'127.0.0.1')
+> * user:             用户名 (default:'root')
+> * password:         数据库密码  (default:'root')
+> * database:         使用的数据库  (default:'test')
+> * port:             端口  (default:'3306')
+> * waitConnection:   是否等待链接(连接池时使用)  (default:true)   
+> * connectionLimit:  连接池大小   (default:10)   
+> * queueLimit:       排队限制   (default:0)   
 
-### Only Generate SQL statements.
+### 只生成sql语句案例
 ```js
 sql
     .table('node_table')
@@ -62,7 +63,7 @@ sql
 SELECT id,name FROM node_table WHERE id=1
 ```
 
-### use exec function
+### 使用exec函数执行sql语句
 ```js
 const sqlstr = sql
     .table('node_table')
@@ -73,7 +74,7 @@ const sqlstr = sql
 const result = await exec(sqlstr);
 ```
 
-### use sql.prototype.exec
+### 使用sql.prototype.exec链式调用
 ```js
 const result = sql
     .table('node_table')
@@ -82,12 +83,12 @@ const result = sql
     .select(true)
     .exec();
 ```
-* .select(true):true
-* It same to use at update(true),insert(true),delet(true),query(true) method.
+* 链式调用执行sql时select方法需要传参数:true
+* 同样适合update(true),insert(true),delet(true),query(true)方法
 
-### use Promise
+### 使用Promise方式
 ```js
-// use exec function
+//使用 exec 函数
 exec(sql.table('web_pages').where({id:147}).select())
     .then(res=>{
         console.log(res)
@@ -95,7 +96,7 @@ exec(sql.table('web_pages').where({id:147}).select())
         console.log(err)
     })
 
-// use exec method
+// 使用 exec 方法
 sql.table('web_pages').where({id:147}).select(true).exec()
     .then(res=>{
         console.log(res)
@@ -106,14 +107,14 @@ sql.table('web_pages').where({id:147}).select(true).exec()
 
 ### 使用async/await
 ```js
-// use exec function
+//使用 exec 函数
 const result = await exec(sql.table('web_pages').where({id:147}).select())
 
-// use exec method
+// 使用 exec 方法
 const result = await sql.table('web_pages').where({id:147}).select(true).exec()
 ```
 
-### transaction
+### 处理事务
 ```js
 const tranSqlArr = [
     sql.table('table1').data({number:'number-5'}).update(),
@@ -122,9 +123,10 @@ const tranSqlArr = [
 const result = await transaction(tranSqlArr)
 ```
 
-### Simple usage of generating SQL statements.
+### 生成sql语句简单用法
+* 备注：sql调用方法的顺序内部已经做了排序，因此可以不按严格的sql语句顺序来写
 
-**select**
+**查询**
 
 ```js
 sql
@@ -136,7 +138,7 @@ sql
 SELECT id,name FROM node_table WHERE id=1
 ```
 
-**insert**
+**插入**
 
 ```js
 sql
@@ -147,7 +149,7 @@ sql
 INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
 ```
 
-**update**
+**更新**
 
 ```js
 sql
@@ -158,7 +160,7 @@ sql
 UPDATE node_table SET name=`zane`,email=`752636052@qq.com`
 ```
 
-**delet**
+**删除**
  
 ```js
 sql .table('node_table')
@@ -168,10 +170,10 @@ sql .table('node_table')
 DELETE FROM node_table WHERE name=`zane`
 ```
 
-### Advanced Usage.
+### 生成sql语句高级用法
 
 ```js
-// parameter json
+//参数json多字段
 sql
     .table('node_table')
     .where({id:1,name:'zane'})
@@ -179,7 +181,7 @@ sql
 
 SELECT  * FROM node_table WHERE id=1 AND name=`zane`
 
-// parameter array
+//参数数组
 let data=[
     {id:1,name:'zhangsan',_type:'or'},
     {sex:1,number:3}
@@ -188,7 +190,7 @@ sql.table('node_table').where(data).select()
 
 SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan` ) AND (sex=1 AND number=3 )
 
-// multiple fields
+//多字段连接方式
 let data=[
     {id:1,name:'zhangsan',_type:'or',_nexttype:'or'},
     {sex:1,number:3,_type:'and'}
@@ -197,7 +199,7 @@ sql.table('node_table').where(data).select()
 
 SELECT * FROM node_table WHERE (id=1 OR name=`zhangsan`) OR (sex=1 AND number=3)
 
-// Expression Query
+//表达式查询
 let data={
     id:{eq:100,egt:10,_type:'or'},
     name:'zhangshan'
@@ -206,7 +208,7 @@ sql.table('node_table').where(data).select()
 
 SELECT  * FROM node_table WHERE ((id=100) OR (id>=10)) AND name=`zhangshan`
 
-// Multiple queries
+//混合查询
 let data=[{
     id:{eq:100,egt:10,_type:'or'},
     name:'zhangshan',
@@ -220,7 +222,7 @@ sql.table('node_table').where(data).select()
 SELECT * FROM node_table WHERE (((id=100) OR (id>=10)) AND name=`zhangshan`) OR (status=1 AND ((name LIKE `%zane%`))) 
 
 
-//UNION ， UNION ALL 
+//UNION ， UNION ALL 组合使用
 sql
     .union('SELECT * FROM think_user_1',true)
     .union('SELECT * FROM think_user_2',true)
@@ -228,7 +230,7 @@ sql
     .union('SELECT * FROM think_user_5',true)
     .select()
 
-result
+得到
 (SELECT * FROM think_user_1) UNION ALL  
 (SELECT * FROM think_user_2) UNION ALL 
 (SELECT * FROM think_user_3) UNION 
@@ -237,11 +239,13 @@ result
 
 ```
 
-## Directory
+更多用法请查看详细文档
 
-* [**1.synopsis **](/README.md)
-  * [**1.1.Parameter Description and Transaction**](/docs/main/main.md)
-* [**2.Chain operation**](/docs/chain/README.md)
+## 文档目录
+
+* [**1.简介**](/README.md)
+  * [**1.1.参数说明与事务**](/docs/main/main.md)
+* [**2.链式操作**](/docs/chain/README.md)
   * [**2.1.WHERE**](/docs/chain/where.md)
   * [**2.2.TABLE**](/docs/chain/table.md)
   * [**2.3.ALIAS**](/docs/chain/alias.md)
@@ -255,19 +259,19 @@ result
   * [**2.11.UNION**](/docs/chain/union.md)
   * [**2.12.DISTINCT**](/docs/chain/distinct.md)
   * [**2.13.COMMENT**](/docs/chain/comment.md)
-* [**3.CURD**](/docs/curd/README.md)
+* [**3.CURD调用**](/docs/curd/README.md)
   * [**3.1.SELECT**](/docs/curd/select.md)
   * [**3.2.UPDATE**](/docs/curd/update.md)
   * [**3.3.INSERT**](/docs/curd/insert.md)
   * [**3.4.DELETE**](/docs/curd/delete.md)
-* [**4.Query mode**](/docs/advanced/README.md)
-  * [**4.1.Basic query**](/docs/advanced/basesearch.md)
-  * [**4.2.Expression Query**](/docs/advanced/bdssearch.md)
-  * [**4.3.Interval query**](/docs/advanced/qjsearch.md)
-  * [**4.4.Composite query**](/docs/advanced/zhsearch.md)
-  * [**4.5.Statistical query**](/docs/advanced/tjsearch.md)
-  * [**4.6.SQL query**](/docs/advanced/sqlsearch.md)
-  * [**4.7.Subquery**](/docs/advanced/childsearch.md)
+* [**4.查询方式**](/docs/advanced/README.md)
+  * [**4.1.基本查询**](/docs/advanced/basesearch.md)
+  * [**4.2.表达式查询**](/docs/advanced/bdssearch.md)
+  * [**4.3.区间查询**](/docs/advanced/qjsearch.md)
+  * [**4.4.组合查询**](/docs/advanced/zhsearch.md)
+  * [**4.5.统计查询**](/docs/advanced/tjsearch.md)
+  * [**4.6.SQL查询**](/docs/advanced/sqlsearch.md)
+  * [**4.7.子查询**](/docs/advanced/childsearch.md)
 
 
 

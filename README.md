@@ -56,7 +56,8 @@ sql
     .field('id,name')
     .where({id:1})
     .select()
-// 执行结果
+
+// result
 SELECT id,name FROM node_table WHERE id=1
 ```
 
@@ -67,6 +68,7 @@ const sqlstr = sql
     .field('id,name')
     .where({id:1})
     .select();
+    
 const result = await exec(sqlstr);
 ```
 
@@ -109,7 +111,6 @@ const result = await exec(sql.table('web_pages').where({id:147}).select())
 // 使用 exec 方法
 const result = await sql.table('web_pages').where({id:147}).select(true).exec()
 ```
-
 
 ### 处理事务
 ```js

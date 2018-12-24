@@ -68,7 +68,7 @@ const sqlstr = sql
     .field('id,name')
     .where({id:1})
     .select();
-    
+
 const result = await exec(sqlstr);
 ```
 
@@ -87,7 +87,7 @@ const result = sql
 ### 使用Promise方式
 ```js
 //使用 exec 函数
-exec( sql.table('web_pages').where({id:147}).select() )
+exec(sql.table('web_pages').where({id:147}).select())
     .then(res=>{
         console.log(res)
     }).catch(err=>{
@@ -95,7 +95,7 @@ exec( sql.table('web_pages').where({id:147}).select() )
     })
 
 // 使用 exec 方法
-sql.table('web_pages').where({id:147}).select(true)
+sql.table('web_pages').where({id:147}).select(true).exec()
     .then(res=>{
         console.log(res)
     }).catch(err=>{

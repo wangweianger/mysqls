@@ -62,17 +62,17 @@ export function getOptToString(opt){
 }
 
 //检查值类型返回相应值
-export function checkOptType(opt){
+export function checkOptType(opt, key){
     let result
     switch(Object.prototype.toString.call(opt)){
         case "[object String]":
-            result = opt
+            result = key && opt.indexOf(key) > -1 && opt.match(/\+|-|\*|\/|%/) ? `${opt}` : `'${opt}'`;
             break;
         case "[object Boolean]": case "[object Number]":
             result = opt
             break; 
         default:
-            result = opt      
+            result = opt
     }
     return result
 }

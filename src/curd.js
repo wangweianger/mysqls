@@ -37,8 +37,8 @@ export function update(type = false){
     let keys        = Object.keys(newopt)
     keys.forEach((item,index)=>{
         datastr =  index==keys.length-1?
-                  `${datastr}${item}=${checkOptType(newopt[item])}`:
-                  `${datastr}${item}=${checkOptType(newopt[item])},`
+                  `${datastr}${item}=${checkOptType(newopt[item], item)}`:
+                  `${datastr}${item}=${checkOptType(newopt[item], item)},`
     })
     result  = this.sqlObj.where ? 
            `UPDATE ${this.sqlObj.table} SET ${datastr} WHERE ${this.sqlObj.where}` :

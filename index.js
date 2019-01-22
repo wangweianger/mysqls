@@ -33,10 +33,18 @@ console.log(mysql)
 
 
 
-// let sqlstr = sql.table('user')
-//             .where({id:1,name:'wangwei'})
+// let sqlstr = sql.table('fea_company')
+//             .where({id:1,companyCode:'hy-ems'})
 //             .select();
 
+
+// let sqlstr = sql.table('fea_company')
+//             // .data('name=1&email=752636052@qq.com')
+//             .data({age:'age+20'})
+//             .update();
+let sqlstr =  sql.table('web_system').data({ slowPageTime: 'slowPageTime-1'}).update()
+
+console.log(sqlstr)
 
 // let sqlstr = sql.table('user')
 //             .where({id:{ eq:2,egt:10,_type:'or'}})
@@ -67,9 +75,9 @@ console.log(mysql)
 //             .update()
 // console.log(updateSql)
 
-let sqlstring = sql.table('node_table').group('user_id').where('id=1').having('count(number)>3').select()
+// let sqlstring = sql.table('node_table').group('user_id').where('id=1').having('count(number)>3').select()
 
-console.log(sqlstring)
+// console.log(sqlstring)
 
 // let delSql = sql.table('user').where('name=`zane`').delet();
 // console.log(delSql)

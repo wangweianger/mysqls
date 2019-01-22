@@ -1,7 +1,7 @@
 
 
-// let { init, exec, sql, transaction } = require('./build/main.js')
-let { init, exec, sql, transaction } = require('mysqls')
+let { init, exec, sql, transaction } = require('./build/main.js')
+// let { init, exec, sql, transaction } = require('mysqls')
 
 async function run(){
 
@@ -23,11 +23,13 @@ async function run(){
 	// 生成sql语句并立即执行
 	console.log(await sql.table('web_system').select(true).exec());
 	
+	console.log(sql.table('web_system').data({ slowPageTime: 'slowPageTime-1'}).update())
+
 	// 事务
 	try{
 		let re2 = await transaction([
-			sql.table('web_system').data({ slowPageTime: 'slowPageTime-1' }).update(),
-			sql.table('web_system').data({ slowJsTime: 'slowJsTime+1' }).update()
+			sql.table('web_system').data({ slowPageTime: 'slowPageTime-1'}).update(),
+			sql.table('web_system').data({ slowJsTime: 'slowJsTime+1'}).update()
 			// 'UPDATE web_system SET slowPageTime=slowPageTime-1',
 			// 'UPDATE web_system SET slowJsTime=slowJsTime+1'
 		])

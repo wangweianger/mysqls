@@ -66,8 +66,6 @@ export function getOptToString(opt){
 
 //检查值类型返回相应值
 export function checkOptType(opt, key){
-    console.log(sqlstring)
-
     let result
     switch(Object.prototype.toString.call(opt)){
         case "[object String]":

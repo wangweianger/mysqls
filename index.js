@@ -42,7 +42,7 @@ console.log(mysql)
 //             // .data('name=1&email=752636052@qq.com')
 //             .data({age:'age+20'})
 //             .update();
-let sqlstr =  sql.table('web_system').data({ slowPageTime: 'slowPageTime-1'}).update()
+let sqlstr =  sql.table('web_system').data({ slowPageTime: true }).update()
 
 console.log(sqlstr)
 

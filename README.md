@@ -9,7 +9,9 @@ mysqls：A plug-in that generates SQL statements for node.js. call chaining .sim
 
 ## install： 
 ```js 
-npm install mysqls --save-dev 
+npm install mysqls --save
+or
+yarn add mysqls
 ```
 
 ## mysqls parameters

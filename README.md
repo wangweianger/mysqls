@@ -242,7 +242,7 @@ result
 
 ## Directory
 
-* [**1.synopsis **](/README.md)
+* [**1.synopsis**](/README.md)
   * [**1.1.Parameter Description and Transaction**](/docs/main/main.md)
 * [**2.Chain operation**](/docs/chain/README.md)
   * [**2.1.WHERE**](/docs/chain/where.md)

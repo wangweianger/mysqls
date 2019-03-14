@@ -155,6 +155,7 @@ INSERT INTO node_table (name,email) VALUES (`zane`,`752636052@qq.com`)
 sql
     .table('node_table')
     .data({name:'zane',email:'752636052@qq.com'})
+    .where({id:1})
     .update()
 
 UPDATE node_table SET name=`zane`,email=`752636052@qq.com`

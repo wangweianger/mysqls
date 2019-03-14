@@ -32,6 +32,7 @@ let data={
 sql
     .table('node_table')
     .data(data)
+    .where({id:1})
     .update()
 
 ```

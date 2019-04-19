@@ -65,13 +65,13 @@ export function getOptToString(opt){
 }
 
 //检查值类型返回相应值
-export function checkOptType(opt, key){
+export function checkOptType(opt, key, type, bol){
     let result
     switch(Object.prototype.toString.call(opt)){
         case "[object String]":
             opt = opt.trim();
             opt = sqlstring.escape(opt);
-            result = key && opt.indexOf(key) > -1 && opt.match(/\+|-|\*|\/|%/) ? opt.slice(1,-1) : `${opt}`;
+            result = type && bol && opt.indexOf(key) > -1 && opt.match(/\+|-|\*|\/|%/) ? opt.slice(1,-1) : `${opt}`;
             break;
         case "[object Boolean]": case "[object Number]":
             result = opt

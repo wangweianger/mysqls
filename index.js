@@ -7,7 +7,6 @@ require('babel-register')
 
 import mysql,{sql} from './src/main'
 
-console.log(mysql)
 
 
 // let sqlstr = sql.table('user')  
@@ -33,6 +32,16 @@ console.log(mysql)
 
 
 
+console.log(
+	sql
+	    .table('news')
+	    .where({name:'zane'})
+	    .page(3,5)
+	    .order('id desc')
+	    .select()
+    )
+
+
 // let sqlstr = sql.table('fea_company')
 //             .where({id:1,companyCode:'hy-ems'})
 //             .select();
@@ -44,7 +53,6 @@ console.log(mysql)
 //             .update();
 let sqlstr =  sql.table('web_system').data({ slowPageTime: true }).where({id:1,name:'zhangshan'}).update()
 
-console.log(sqlstr)
 
 // let sqlstr = sql.table('user')
 //             .where({id:{ eq:2,egt:10,_type:'or'}})

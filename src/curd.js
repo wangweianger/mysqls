@@ -30,21 +30,23 @@ export function select(type=false){
     }
 }
 
-export function update(type = false){
+export function update(type = false, bol = false){
     let result      = ''
     let datastr     = ''
     let newopt      = this.sqlObj.data
+
     let keys        = Object.keys(newopt)
+
     keys.forEach((item,index)=>{
         datastr =  index==keys.length-1?
-                  `${datastr}${item}=${checkOptType(newopt[item], item)}`:
-                  `${datastr}${item}=${checkOptType(newopt[item], item)},`
+                  `${datastr}${item}=${checkOptType(newopt[item], item, type, bol)}`:
+                  `${datastr}${item}=${checkOptType(newopt[item], item, type, bol)},`
     })
     result  = this.sqlObj.where ? 
            `UPDATE ${this.sqlObj.table} SET ${datastr} WHERE ${this.sqlObj.where}` :
            `UPDATE ${this.sqlObj.table} SET ${datastr}`
     const sqlStr = result.replace(/'/g, '\'').replace(/`/g, '\'');
-    if (type) {
+    if (type && !bol) {
         this.sqlObj.sqlStr = sqlStr; return this;
     } else {
         this.sqlObj = {}; return sqlStr;

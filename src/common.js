@@ -88,7 +88,7 @@ export function order(opt){
   参数类型 ： Number
   案例 limit(10)  | limit(10,20)
  */
-export function limit(){
+export function limit(){ 
     this.sqlObj.limit = `LIMIT ${Array.prototype.slice.apply(arguments)}` 
     return this
 }
@@ -105,8 +105,8 @@ export function page(option){
         opt     = Array.prototype.slice.apply(arguments)
     }
     if(opt.length==2){
-        let begin   = parseInt(opt[0]-1) * parseInt(opt[1])
-        let end     = begin + parseInt(opt[1]) -1
+        let begin   = parseInt(opt[0]-1) * parseInt(opt[1]);
+        let end     = parseInt(opt[1])
         this.sqlObj.limit = `LIMIT ${begin},${end}` 
     }
     return this

@@ -12,6 +12,8 @@ async function run(){
 	  database: 'web-performance'
 	}
 	init(config)
+
+
 	
 	// 获得生成的sql语句
 	const sqlstr = sql.table('web_system').select()

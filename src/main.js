@@ -18,6 +18,7 @@ let sqljson = Object.assign({}, common, curd)
 //建立sql对象
 function mysql() {
     this.sqlObj = {}
+    this.istransaction = false;
 }
 
 for (let key in sqljson) {

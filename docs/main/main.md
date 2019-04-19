@@ -48,8 +48,8 @@ let result = await execute(config,sqlStr)
 ```js
 //需要执行事务的相关语句 table1表的number减少5，table2表的number增加5
 let tranSqlArr = [
-    sql.table('table1').data({number:number-5}).update(),
-    sql.table('table2').data({number:number+5}).update()
+    sql.table('table1').data({number:number-5}).update(true,true),
+    sql.table('table2').data({number:number+5}).update(true,true)
 ]
 let result = await transaction(config,tranSqlArr)
 console.log(result) 

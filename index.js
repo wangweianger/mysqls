@@ -7,6 +7,8 @@ require('babel-register')
 
 import mysql,{sql} from './src/main'
 
+const content = document.querySelector('#content')
+let result = '';
 
 
 // let sqlstr = sql.table('user')  
@@ -32,26 +34,22 @@ import mysql,{sql} from './src/main'
 
 
 
-console.log(
-	sql
-	    .table('news')
-	    .where({name:'zane'})
-	    .page(3,5)
-	    .order('id desc')
-	    .select()
-    )
-
+// const result = sql
+// 	    .table('news')
+// 	    .where({name:'zane'})
+// 	    .page(3,5)
+// 	    .order('id desc')
+// 	    .select()
 
 // let sqlstr = sql.table('fea_company')
 //             .where({id:1,companyCode:'hy-ems'})
 //             .select();
 
-
 // let sqlstr = sql.table('fea_company')
 //             // .data('name=1&email=752636052@qq.com')
 //             .data({age:'age+20'})
 //             .update();
-let sqlstr =  sql.table('web_system').data({ slowPageTime: true }).where({id:1,name:'zhangshan'}).update()
+// let sqlstr =  sql.table('web_system').data({ slowPageTime: true }).where({id:1,name:'zhangshan'}).update()
 
 
 // let sqlstr = sql.table('user')
@@ -70,12 +68,22 @@ let sqlstr =  sql.table('web_system').data({ slowPageTime: true }).where({id:1,n
 
 // console.log(sql.table(`(${sql.table('user').where('id=2').select()})`).where('name=`zhangsan`').select()) 
 
-// let data={
-//     name:'zane',
-//     email:'752636052@qq.com'
-// }
-// let insertSql = sql.table('user').data(data).insert();
-// console.log(insertSql)
+let data1 = {
+		name: 'zane',
+		email: '752636052@qq.com'
+	}
+let insertSql1 = sql.table('email').data(data1).insert();
+console.log()
+
+let data = [
+	{ name: 'zane', email: '752636052@qq.com' },
+	{ name: 'zane_1', email: '752636052_1@qq.com' },
+	{ name: 'zane_2', email: '752636052_2@qq.com' },
+]
+let insertSql = sql.table('email').data(data).insert();
+console.log(insertSql)
+
+content.innerHTML = `${insertSql1} <br/> ${insertSql}`;
 
 // let updateSql = sql
 //             .table('user')

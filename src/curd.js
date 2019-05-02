@@ -1,6 +1,7 @@
 import {
     sortSelectSql,
-    checkOptType
+    checkOptType,
+    handleInsertData,
 } from './uitl'
 
 export function select(type=false){
@@ -54,15 +55,8 @@ export function update(type = false, bol = false){
 }   
 
 export function insert(type = false){
-    let keys    =''
-    let values  =''
     let newopt  = this.sqlObj.data
-    let datastr = ''
-    for(let key in newopt){
-        keys    = keys ? `${keys},${key}` : key
-        values  = values ? `${values},${checkOptType(newopt[key])}` : checkOptType(newopt[key])
-    }
-    datastr=`(${keys}) VALUES (${values})`
+    const datastr = handleInsertData(newopt);
     let result = `INSERT INTO ${this.sqlObj.table} ${datastr}`
     const sqlStr = result.replace(/'/g, '\'').replace(/`/g, '\'')
     if (type) {

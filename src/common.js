@@ -55,7 +55,7 @@ export function alias(opt){
   案例： {name:'zane',email:'752636052@qq.com'}  |  'name=zane&email=752636052@qq.com'
 */
 export function data(opt){
-    let newopt  ={}
+    let newopt  = {}
     if(typeof(opt)==='string'){
         let arr = opt.split('&')
         arr.forEach(item=>{

@@ -191,6 +191,56 @@ export function sortSelectSql(json){
     };               
 }
 
+function sortArray(data){
+    const result = [];
+    const item = Object.keys(data[0])
+    for (let i = 1; i < data.length; i++) {
+        for (let j = 0; j < item.length; j++) {
+            if (!Object.keys(data[i]).includes(item[j])){
+                item.splice(j, 1);
+            }
+        }
+    }
+    for (let i = 0; i < data.length; i++) {
+        let json = {};
+        for (let j = 0; j < item.length; j++) {
+            json[[item[j]]] = data[i][item[j]];
+        }
+        result.push(json)
+    }
+    return result;
+}
 
+// 处理insert批量插入data参数
+export function handleInsertData(data) {
+    if (!data) return '';
+    if (Array.isArray(data) && data.length === 1) data = data[0];
 
+    let keys = ''
+    let values  = ''
+    let datastr = ''
+    
+    if (Array.isArray(data)){
+        // array
+        data = sortArray(data);
+        keys = Object.keys(data[0]).toString();
+        for(let i = 0; i < data.length; i++) {
+            let items = ''
+            for (let key in data[i]) {
+                items = items ? `${items},${checkOptType(data[i][key])}` : checkOptType(data[i][key])
+            }
+            values += `(${items}),`
+        }
+        values = values.slice(0, -1)
+    }else{
+        // object
+        for (let key in data) {
+            keys = keys ? `${keys},${key}` : key
+            values = values ? `${values},${checkOptType(data[key])}` : checkOptType(data[key])
+        }
+        values = `(${values})`;
+    }
+    datastr = `(${keys}) VALUES ${values}`
+    return datastr;
+}
 

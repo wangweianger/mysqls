@@ -117,8 +117,8 @@ const result = await sql.table('web_pages').where({id:147}).select(true).exec()
 ### 处理事务
 ```js
 const tranSqlArr = [
-    sql.table('table1').data({number:'number-5'}).update(),
-    sql.table('table2').data({number:'number+5'}).update()
+    sql.table('table1').data({number:'number-5'}).update(true,true),
+    sql.table('table2').data({number:'number+5'}).update(true,true)
 ]
 const result = await transaction(tranSqlArr)
 ```

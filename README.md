@@ -85,7 +85,7 @@ const result = sql
     .exec();
 ```
 * .select(true):true
-* It same to use at update(true),insert(true),delet(true),query(true) method.
+* It same to use at update(true)、insert(true)、delet(true)、query(true) method.
 
 ### use Promise
 ```js

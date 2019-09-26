@@ -1,7 +1,7 @@
 ### [EN](/README.md) | [CN](/README-CN.md)
 
 # mysqls
-It is written in JavaScript,crud for mysql.You can also use transactions very easily.
+It is written in JavaScript. crud for mysql. You can also use transactions very easily.
 
 mysqls：A plug-in that generates SQL statements for node.js. call chaining .simple to use. support transaction.
 

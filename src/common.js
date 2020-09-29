@@ -184,36 +184,36 @@ export function comment(opt){
     return this
 }
 
-export function count(opt){
+export function count(opt, alias){
     let optvalue = opt || 1
-    this.sqlObj.count = `COUNT(${optvalue})`
+    this.sqlObj.count = `COUNT(${optvalue})` + (alias ? ` AS ${alias}` : '')
     return this
 }
 
-export function max(opt){
+export function max(opt, alias){
     if(opt) {
-        this.sqlObj.max = `MAX(${opt})`
+        this.sqlObj.max = `MAX(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }
 
-export function min(opt){
+export function min(opt, alias){
     if(opt) {
-        this.sqlObj.min = `MIN(${opt})`
+        this.sqlObj.min = `MIN(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }
 
-export function avg(opt){
+export function avg(opt, alias){
     if(opt) {
-        this.sqlObj.avg = `AVG(${opt})`
+        this.sqlObj.avg = `AVG(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }
 
-export function sum(opt){
+export function sum(opt, alias){
     if(opt) {
-        this.sqlObj.sum = `SUM(${opt})`
+        this.sqlObj.sum = `SUM(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }

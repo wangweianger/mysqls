@@ -13,7 +13,7 @@ gulp.task('build', () =>
     .pipe(uglify())
     .pipe(gulp.dest('./build'))
 ); 
-gulp.task('default', ['build']);
+gulp.task('default', gulp.series(['build']));
 
 
 

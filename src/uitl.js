@@ -1,7 +1,7 @@
 import sqlstring from 'sqlstring'
 
 
-//把查询参数转换为strng
+//把查询参数转换为string
 export function getOptToString(opt){
     let result  = ''
     let optType = Object.prototype.toString.call(opt)
@@ -151,7 +151,7 @@ export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
             result = `(${par_key} NOT IN (${value}))`
             break;                 
         default:
-            result = `(${par_key}=${checkOptType(value)})`    
+            result = `(${par_key}=${checkOptType(value)})`
     }
     return isLastOne ? `${result} ` : `${result} ${_type} `
 }

@@ -30,12 +30,26 @@ export function where(opt){
 }
 
 /*查询字段
-  参数为 String | Array
-  案例： field('id,name,age,sex')  | field(['id','name','age','sex'])
+  参数为 String | Array <string|object>
+  案例： String field('id,name,age,sex')  | field(['id','name','age','sex'])
+        Array<string>  field(['id', 'name, 'age', 'sex', 'remarks'])
+        Array<string|object>  field(['id', 'name', 'age', {'user_id': 'userId', 'a.user_name': 'userName', 'b.user_age': 'userAge'}, 'remarks'])
+
 */
-export function field(opt){
-    if(typeof(opt)==='object'){
-        opt = opt.join(',')
+export function field (opt) {
+    if (typeof (opt) === 'object') {
+        const tempObj = []
+        for (const k of opt) {
+            if (typeof k === 'string') {
+                tempObj.push(k)
+            } else {
+                const optKeys = Object.keys(k)
+                for (const optK of optKeys) {
+                    tempObj.push(`${optK} AS ${k[optK]}`)
+                }
+            }
+        }
+        opt = tempObj.join(',')
     }
     this.sqlObj.field = opt
     return this;

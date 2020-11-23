@@ -86,6 +86,15 @@ console.log(insertSql)
 
 content.innerHTML = `${insertSql1} <br/> ${insertSql}`;
 
+console.group('普通查询语句')
+console.log(sql.table('atables').field('id, name, hello_boy').select())
+console.groupEnd()
+
+console.group('数组类型')
+console.log('Array<string>', sql.table('atables').field(['a.id', 'name', 'hello_boy', 'remarks']).select())
+console.log('Array<string|object>', sql.table('atables a, btables b').field(['id', 'name', { 'a.hello_boy': 'helloBoy', 'b.user_id': 'userId' }, 'remarks']).select())
+console.groupEnd()
+
 // let updateSql = sql
 //             .table('user')
 //             .data(data)

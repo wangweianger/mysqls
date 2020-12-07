@@ -1,0 +1,7 @@
+.cache
+/dist
+/node_modules
+/src
+/gulpfile.js
+/index.html
+/index.js

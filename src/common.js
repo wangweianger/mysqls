@@ -49,7 +49,7 @@ export function field (opt) {
                 }
             }
         }
-        opt = tempObj.join(',')
+        opt = tempObj.join(', ')
     }
     this.sqlObj.field = opt
     return this;

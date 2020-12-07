@@ -34,7 +34,7 @@ sql.table('node_table').field(['id','name', {'user_id': 'userId', 'user_name': '
 
 最终得到
 ```js
-SELECT id,name, user_id AS userId user_name AS userName age FROM node_table WHERE id=1 
+SELECT id,name, user_id AS userId, user_name AS userName, age FROM node_table WHERE id=1 
 ```
 
 

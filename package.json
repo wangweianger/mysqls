@@ -1,8 +1,9 @@
 {
-  "name": "node-easy-mysqls",
-  "version": "0.0.1",
-  "description": "fork mysqls 修改源码之后的上传",
-  "main": "./build/main.js",
+  "name": "node-mysqls",
+  "version": "0.0.2",
+  "description": "快速生成mysql语句 fork from wangweianger/mysqls",
+  "main": "index.js",
+  "keywords": ["node", "mysql", "node-mysqls", "mysqls", "sql"],
   "scripts": {
     "dev": "parcel ./index.html",
     "build": "gulp"
@@ -46,6 +47,8 @@
     "build/",
     "docs/",
     "LICENSE",
-    "README.md"
+    "README-CN.md",
+    "README.md",
+    "SUMMARY.MD"
   ]
 }

@@ -70,11 +70,12 @@ let result = '';
 // console.log(sql.table(`(${sql.table('user').where('id=2').select()})`).where('name=`zhangsan`').select()) 
 
 let data1 = {
+		pid: 0,
 		name: 'zane',
 		email: '752636052@qq.com'
 	}
 let insertSql1 = sql.table('email').data(data1).insert();
-console.log()
+console.log(insertSql1)
 
 let data = [
 	{ name: 'zane', email: '752636052@qq.com' },

@@ -227,7 +227,7 @@ export function handleInsertData(data) {
         for(let i = 0; i < data.length; i++) {
             let items = ''
             for (let key in data[i]) {
-                items = items ? `${items},${checkOptType(data[i][key])}` : checkOptType(data[i][key])
+                items = `${items}` ? `${items},${checkOptType(data[i][key])}` : checkOptType(data[i][key])
             }
             values += `(${items}),`
         }
@@ -236,7 +236,7 @@ export function handleInsertData(data) {
         // object
         for (let key in data) {
             keys = keys ? `${keys},${key}` : key
-            values = values ? `${values},${checkOptType(data[key])}` : checkOptType(data[key])
+            values = `${values}` ? `${values},${checkOptType(data[key])}` : checkOptType(data[key])
         }
         values = `(${values})`;
     }

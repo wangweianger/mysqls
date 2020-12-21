@@ -1,9 +1,15 @@
 {
   "name": "node-mysqls",
-  "version": "0.0.2",
-  "description": "快速生成mysql语句 fork from wangweianger/mysqls",
+  "version": "0.0.3",
+  "description": "快速生成mysql语句",
   "main": "index.js",
-  "keywords": ["node", "mysql", "node-mysqls", "mysqls", "sql"],
+  "keywords": [
+    "node",
+    "mysql",
+    "node-mysqls",
+    "mysqls",
+    "sql"
+  ],
   "scripts": {
     "dev": "parcel ./index.html",
     "build": "gulp"
@@ -41,7 +47,8 @@
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "parcel": "^1.12.4"
   },
   "files": [
     "build/",

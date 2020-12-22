@@ -1,6 +1,6 @@
 {
   "name": "node-mysqls",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "快速生成mysql语句",
   "main": "./build/main.js",
   "keywords": [

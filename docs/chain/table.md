@@ -16,5 +16,14 @@ SELECT  * FROM node_table a WHERE id=1
 
 ```
 
+多表同时查询:
+```js
+sql.table({'node_table1': 'a', 'node_table2': 'b'}).where('id=1').select()
+```
+得到:
+```
+SELECT * FROM node_table1 AS a, node_table2 AS b WHERE id=1
+```
+
 
 join方法还需要补充...

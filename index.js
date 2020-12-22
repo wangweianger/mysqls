@@ -88,9 +88,27 @@ console.log(insertSql)
 content.innerHTML = `${insertSql1} <br/> ${insertSql}`;
 
 console.group('普通查询语句')
-console.log(sql.table('atables').field('id, name, hello_boy').select())
+console.log(sql.table({'user': 'a', 'menu': 'b'}).select())
+console.log(sql.table({'gp_table1': 'a', 'gp_table2': 'b'}).join({
+	dir: 'left outer',
+	table: 'hello',
+	where: [{'a.id': ['hello.id'], 'b.id': ['hello.id'], _type: 'or', _nexttype: 'or'}, {'hello.name': ['b.name']}]
+}).field('id, name, hello_boy').select())
 console.groupEnd()
-
+console.log(sql.table('node_table').group('user_id').join({
+  dir: 'left',
+  table: ('join_table'),
+  where: [{'node_talbe.id': ['join_table.id']}]
+}).where('id=1').having('count(number)>3').select(), '516516516516')
+console.log(sql.table('node_table').join([{
+  dir: 'left',
+  table: ('left_table'),
+  where: [{'node_talbe.id': ['join_table.id']}]
+}, {
+  dir: 'right',
+  table: ('right_table'),
+  where: [{'right_table.id': ['left_table.id']}]
+}]).where('node_table.id=1').select(), '516516516516')
 console.group('数组类型')
 console.log('Array<string>', sql.table('atables').field(['a.id', 'name', 'hello_boy', 'remarks']).select())
 console.log('Array<string|object>', sql.table('atables a, btables b').field(['id', 'name', { 'a.hello_boy': 'helloBoy', 'b.user_id': 'userId' }, 'remarks']).select())

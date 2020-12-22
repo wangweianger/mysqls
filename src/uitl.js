@@ -157,26 +157,30 @@ export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
 }
 
 //排序 生成 sql 字符串
-export function sortSelectSql(json){
+export function sortSelectSql(json, bool = false){
     let result          = json || {}
-    if(result.count||result.max||result.min||result.avg||result.sum){
-        let concatstr=(result.count?`,${result.count}`:'')
-                +(result.max?`,${result.max}`:'')
-                +(result.min?`,${result.min}`:'')
-                +(result.avg?`,${result.avg}`:'')
-                +(result.sum?`,${result.sum}`:'')
-        result.count=result.max=result.min=result.avg=result.sum='';
-        result.field? result.field = (result.field+concatstr) : result.field = concatstr.substring(1)
-    }
-    if(!result.field)result.field = '*' 
-    if(result.table) result.table = `FROM ${result.table}`
-    if(result.where) result.where = `WHERE ${result.where}`     
+    if (bool) {
+        if(result.table) result.table = `${result.table}`
+    } else {
+        if(result.count||result.max||result.min||result.avg||result.sum){
+            let concatstr=(result.count?`,${result.count}`:'')
+                    +(result.max?`,${result.max}`:'')
+                    +(result.min?`,${result.min}`:'')
+                    +(result.avg?`,${result.avg}`:'')
+                    +(result.sum?`,${result.sum}`:'')
+            result.count=result.max=result.min=result.avg=result.sum='';
+            result.field? result.field = (result.field+concatstr) : result.field = concatstr.substring(1)
+        }
+        if(!result.field)result.field = '*' 
+        if(result.table) result.table = `FROM ${result.table}`
+        if(result.where) result.where = `WHERE ${result.where}`
+    }   
 
     let keys = Object.keys(result)
     let keysresult = []
     // 查询默认排序数组
     let searchSort  =  ['union','distinct','field','count','max','min','avg','sum','table',
-                        'alias','where','group','having','order','limit','page','comment']
+                        'alias', 'join', 'where','group','having','order','limit','page','comment']
     //排序                    
     keys.forEach((item1,index1)=>{
         searchSort.forEach((item2,index2)=>{

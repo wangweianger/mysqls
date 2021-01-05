@@ -1,6 +1,6 @@
 {
   "name": "mysqls",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "build/main.js",
   "typings": "build/main.d.ts",
   "repository": "git@github.com:wangweianger/mysqls.git",

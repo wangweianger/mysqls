@@ -7,13 +7,16 @@
     "dev": "parcel ./index.html",
     "build": "gulp"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gphp0071201/mysqls.git"
+  },
   "engines": {
     "node": ">= 8.0.0",
     "npm": ">= 4.2.0"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "http://blog.seosiwei.com/",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -33,11 +36,19 @@
     "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^3.0.0",
     "mysql2": "^1.6.4",
-    "mysqls": "^1.0.0",
     "symbol-observable": "^1.1.0"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
-    "mysql": "^2.15.0"
-  }
+    "mysql": "^2.15.0",
+    "parcel": "^1.12.4"
+  },
+  "files": [
+    "build/",
+    "docs/",
+    "LICENSE",
+    "README-CN.md",
+    "README.md",
+    "SUMMARY.MD"
+  ]
 }

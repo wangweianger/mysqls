@@ -15,7 +15,7 @@ sql.table('node_table').field('id,name').where(data).select()
 SELECT id,name FROM node_table WHERE id=1 
 ```
 
-field参数为数组
+field参数为数组 
 ```js 
 let data={
     id:1
@@ -26,6 +26,15 @@ sql.table('node_table').field(['id','name']).where(data).select()
 最终得到
 ```js
 SELECT id,name FROM node_table WHERE id=1 
+```
+
+```js 
+sql.table('node_table').field(['id','name', {'user_id': 'userId', 'user_name': 'userName'}, 'age']).where(data).select()
+```
+
+最终得到
+```js
+SELECT id,name, user_id AS userId, user_name AS userName, age FROM node_table WHERE id=1 
 ```
 
 

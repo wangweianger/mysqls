@@ -2,15 +2,32 @@ import {
     getOptToString,
     checkOptType,
     checkOptObjType,
-    expressionQuery
+    expressionQuery,
+    sortSelectSql
 } from './uitl.js'
 
-//需要查询的table表  参数：String  案例：table('user')
-export function table(opt){
-    if(opt&&opt.indexOf('SELECT')!=-1){
-        opt = `(${opt})`
+// 需要查询的table表  参数：String, object
+// 案例：String  table('user')
+/**
+ * 需要查询的table表 参数: string, object
+ * 案例: string:  table('user')
+ *       object: table({'user_name': 'a', 'user_b': 'b'})
+ * @param {*} opt 
+ */
+export function table (opt) {
+    if (typeof opt === 'string') {
+        if(opt&&opt.indexOf('SELECT')!=-1){
+            opt = `(${opt})`
+        }
+        if(opt) this.sqlObj.table = opt
+    } else {
+        const keys = Object.keys(opt)
+        let arr = []
+        for (const k of keys) {
+            arr.push(`${k} AS ${opt[k]}`)
+        }
+        this.sqlObj.table = arr.join(', ')
     }
-    if(opt) this.sqlObj.table = opt
     return this;
 } 
 
@@ -29,13 +46,53 @@ export function where(opt){
     return this;
 }
 
+/**
+ * @param {Array<object>|object} opt join参数
+ * opt.dir 连接方向
+ * opt.table 连接表名
+ * opt.where 连接条件
+ */
+
+export function join(opt) {
+    let result = ''
+    switch (Object.prototype.toString.call(opt)) {
+        case '[object Array]':
+            for (let i = 0, len = opt.length; i < len; i++) {
+                if (!opt[i].dir || !opt[i].table || !opt[i].where) continue
+                result += ` ${opt[i].dir.toUpperCase()} JOIN ${sortSelectSql(opt[i].table, true).result} ON ${getOptToString(opt[i].where)}`
+            }
+            break;
+        case '[object Object]':
+            if (!opt.dir || !opt.table || !opt.where) return
+            result += ` ${opt.dir.toUpperCase()} JOIN ${sortSelectSql(opt.table, true).result} ON ${getOptToString(opt.where)}`
+            break
+        default:
+            break;
+    }
+    if (result) this.sqlObj.join = result
+    return this
+}
 /*查询字段
-  参数为 String | Array
-  案例： field('id,name,age,sex')  | field(['id','name','age','sex'])
+  参数为 String | Array <string|object>
+  案例： String field('id,name,age,sex')  | field(['id','name','age','sex'])
+        Array<string>  field(['id', 'name, 'age', 'sex', 'remarks'])
+        Array<string|object>  field(['id', 'name', 'age', {'user_id': 'userId', 'a.user_name': 'userName', 'b.user_age': 'userAge'}, 'remarks'])
+
 */
-export function field(opt){
-    if(typeof(opt)==='object'){
-        opt = opt.join(',')
+export function field (opt) {
+    if (typeof (opt) === 'object') {
+        const tempObj = []
+        for (const k of opt) {
+            if (typeof k === 'string') {
+                tempObj.push(k)
+            } else {
+                const optKeys = Object.keys(k)
+                for (const optK of optKeys) {
+                    tempObj.push(`${optK} AS ${k[optK]}`)
+                }
+            }
+        }
+        opt = tempObj.join(', ')
     }
     this.sqlObj.field = opt
     return this;

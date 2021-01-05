@@ -9,8 +9,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "gts clean",
-    "compile": "tsc -p .",
-    "prepublish": "npm run build"
+    "compile": "tsc -p ."
   },
   "devDependencies": {
     "@types/sqlstring": "^2.3.0",

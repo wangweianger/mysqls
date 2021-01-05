@@ -1,15 +1,14 @@
-import * as sqlstring from 'sqlstring'
-import { AnyOpt } from './types'
+import sqlstring from 'sqlstring'
 
 
 //把查询参数转换为strng
-export function getOptToString(opt: string | AnyOpt | AnyOpt[]){
+export function getOptToString(opt){
     let result  = ''
     let optType = Object.prototype.toString.call(opt)
     
     if(optType==='[object Object]'){
-        let _type = (opt as AnyOpt)._type && (opt as AnyOpt)._type.toUpperCase() || 'AND'
-        let number = (opt as AnyOpt)._type && (opt as AnyOpt)._type.trim()?1:0
+        let _type = opt._type&&opt._type.toUpperCase() || 'AND'
+        let number = opt._type&&opt._type.trim()?1:0
 
         let keys = Object.keys(opt)
         keys.forEach((item,index)=>{
@@ -29,7 +28,7 @@ export function getOptToString(opt: string | AnyOpt | AnyOpt[]){
             }
         })
     }else if(optType === '[object Array]'){
-        (opt as AnyOpt[]).forEach((item,index)=>{
+        opt.forEach((item,index)=>{
             let result1     =''
             let number      = 0
             let _type       = item._type&&item._type.toUpperCase() || 'AND'
@@ -66,8 +65,8 @@ export function getOptToString(opt: string | AnyOpt | AnyOpt[]){
 }
 
 //检查值类型返回相应值
-export function checkOptType(opt: any, key?: string, type?:boolean , bol?: boolean){
-    let result: any
+export function checkOptType(opt, key, type, bol){
+    let result
     switch(Object.prototype.toString.call(opt)){
         case "[object String]":
             opt = opt.trim();
@@ -203,9 +202,9 @@ function sortArray(data){
         }
     }
     for (let i = 0; i < data.length; i++) {
-        let json: AnyOpt = {};
+        let json = {};
         for (let j = 0; j < item.length; j++) {
-            json[[item[j]] as any] = data[i][item[j]];
+            json[[item[j]]] = data[i][item[j]];
         }
         result.push(json)
     }

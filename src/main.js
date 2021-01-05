@@ -2,14 +2,12 @@
     auther : zane
     version: 1.0.0
     blog:http://blog.seosiwei.com
-    github: https://github.com/wangweianger/mysqls
-    npm: https://www.npmjs.com/package/mysqls
+    github:https://github.com/wangweianger/node-transform-mysql
+    npm:
 */
+
 import * as common from './common'
 import * as curd from './curd'
-import { Config } from './types'
-
-
 
 let connection = null;
 let ispool = true;
@@ -23,20 +21,22 @@ function mysql() {
     this.istransaction = false;
 }
 
-mysql.prototype.exec = exec;
-
 for (let key in sqljson) {
     mysql.prototype[key] = sqljson[key]
 }
 
-
-/**
- * 初始化
- *
- * @export
- * @param {Config} config
+/*
+ *host
+ *user
+ *password
+ *database
+ *port
+ *ispool  是否使用连接池链接
+ *waitConnection  是否等待链接  
+ *connectionLimit  连接池数
+ *queueLimit 排队限制 
  */
-export function init(config: Config) {
+function init(config = {}) {
     const mysql2 = require('mysql2');
     ispool = typeof(config.ispool) === 'boolean' ? config.ispool : true;
     if (ispool) {
@@ -51,7 +51,7 @@ export function init(config: Config) {
             queueLimit: config.queueLimit || 0,
         });
     } else {
-        connection = (mysql as any).createConnection({
+        connection = mysql.createConnection({
             host: config.host || '127.0.0.1',
             user: config.user || 'root',
             password: config.password || 'root',
@@ -61,16 +61,7 @@ export function init(config: Config) {
     }
 }
 
-
-/**
- * 运行sql
- *
- * @export
- * @param {string} sqlstring
- * @param {boolean} [type=false]
- * @returns
- */
-export async function exec(sqlstring: string, type = false) {
+async function exec(sqlstring, type = false) {
     if (this instanceof mysql){
         sqlstring = this.sqlObj.sqlStr;
         this.sqlObj = {};
@@ -80,7 +71,7 @@ export async function exec(sqlstring: string, type = false) {
             reject('Please initialize mysql first.');
             return false;
         }
-        connection.query(sqlstring, function(error: any, results: any, fields: any) {
+        connection.query(sqlstring, function(error, results, fields) {
             if (error) {
                 reject(error);
             } else {
@@ -90,16 +81,9 @@ export async function exec(sqlstring: string, type = false) {
         });
     })
 }
+mysql.prototype.exec = exec;
 
-
-/**
- * 事务
- *
- * @export
- * @param {string[]} [sqlstringArr=[]]
- * @returns
- */
-export async function transaction(sqlstringArr: string[] = []) {
+async function transaction(sqlstringArr = []) {
     return new Promise(async function(resolve, reject) {
         if (!connection){
             reject('Please initialize mysql first.');
@@ -134,5 +118,9 @@ export async function transaction(sqlstringArr: string[] = []) {
     })
 }
 
-
-export const sql = new mysql()
+module.exports = {
+    init: init,
+    exec: exec,
+    transaction: transaction,
+    sql: new mysql()
+}

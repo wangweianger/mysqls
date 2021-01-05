@@ -1,8 +1,12 @@
-import { AnyOpt } from './types';
-import { getOptToString } from './uitl'
+import {
+    getOptToString,
+    checkOptType,
+    checkOptObjType,
+    expressionQuery
+} from './uitl.js'
 
 //需要查询的table表  参数：String  案例：table('user')
-export function table(opt: string){
+export function table(opt){
     if(opt&&opt.indexOf('SELECT')!=-1){
         opt = `(${opt})`
     }
@@ -14,7 +18,7 @@ export function table(opt: string){
   参数为 String | Object | Array
   案例： 
 */
-export function where(opt: string | AnyOpt | AnyOpt[]){
+export function where(opt){
     let result = ''
     if(typeof(opt)==='string'){
         result = opt
@@ -29,7 +33,7 @@ export function where(opt: string | AnyOpt | AnyOpt[]){
   参数为 String | Array
   案例： field('id,name,age,sex')  | field(['id','name','age','sex'])
 */
-export function field(opt: string | string[]){
+export function field(opt){
     if(typeof(opt)==='object'){
         opt = opt.join(',')
     }
@@ -41,7 +45,7 @@ export function field(opt: string | string[]){
   参数为 String
   案例： alias('a')
 */
-export function alias(opt: string){
+export function alias(opt){
     this.sqlObj.alias=opt
     return this;
 }
@@ -50,7 +54,7 @@ export function alias(opt: string){
   参数为 json | string
   案例： {name:'zane',email:'752636052@qq.com'}  |  'name=zane&email=752636052@qq.com'
 */
-export function data(opt: AnyOpt | string){
+export function data(opt){
     let newopt  = {}
     if(typeof(opt)==='string'){
         let arr = opt.split('&')
@@ -69,7 +73,7 @@ export function data(opt: AnyOpt | string){
   参数为 Array | string
   案例： order(['id','number asc'])  | order('id desc')
 */
-export function order(opt: string[] | string){
+export function order(opt){
     let orderby = 'ORDER BY'
 
     if(typeof(opt) === 'object'){
@@ -93,15 +97,15 @@ export function limit(){
   参数类型 ： Number | String
   案例 page(1,10)  | page(2,10) | page('3,10')
  */
-export function page(option: number | string){
+export function page(option){
     let opt     = []
     if(arguments.length === 1){
-        opt     = (option as string).split(',');
+        opt     = option.split(',');
     }else{
         opt     = Array.prototype.slice.apply(arguments)
     }
     if(opt.length==2){
-        let begin   = parseInt((opt[0]-1) as any) * parseInt(opt[1]);
+        let begin   = parseInt(opt[0]-1) * parseInt(opt[1]);
         let end     = parseInt(opt[1])
         this.sqlObj.limit = `LIMIT ${begin},${end}` 
     }
@@ -112,7 +116,7 @@ export function page(option: number | string){
   参数类型 ： String
   案例        group('id,name')
  */
-export function group(opt: string){
+export function group(opt){
     this.sqlObj.group = `GROUP BY ${opt}`
     return this
 }
@@ -121,7 +125,7 @@ export function group(opt: string){
     参数类型： String
     案例：    having('count(number)>3')
  */
-export function having(opt: string){
+export function having(opt){
     this.sqlObj.having = `HAVING ${opt}`
     return this
 }
@@ -130,7 +134,7 @@ export function having(opt: string){
     参数类型： String | Array
     案例： union('SELECT name FROM node_user_1') | union(['SELECT name FROM node_user_1','SELECT name FROM node_user_2'])
  */
-export function union(opt: string | string[] ,type=false){
+export function union(opt,type=false){
     if(typeof(opt) === 'string'){
         if(this.sqlObj.union){
             this.sqlObj.union =`${this.sqlObj.union} (${opt}) ${type?'UNION ALL':'UNION'}`
@@ -151,7 +155,7 @@ export function union(opt: string | string[] ,type=false){
     参数类型： Boolean
     案例： distinct(true)
  */
-export function distinct(opt: boolean){
+export function distinct(opt){
     if(opt){
         this.sqlObj.distinct = 'DISTINCT'
     }
@@ -162,7 +166,7 @@ export function distinct(opt: boolean){
     参数类型： Boolean
     案例：  lock(true)
  */
-export function lock(opt: boolean){
+export function lock(opt){
     if(opt){
         this.sqlObj.lock = 'FOR UPDATE'
     }
@@ -173,41 +177,41 @@ export function lock(opt: boolean){
     参数类型： String
     案例：  comment('查询用户的姓名')
  */
-export function comment(opt: string){
+export function comment(opt){
     if(opt){
         this.sqlObj.comment = `/* ${opt} */`
     }
     return this
 }
 
-export function count(opt: string, alias: string){
+export function count(opt, alias){
     let optvalue = opt || 1
     this.sqlObj.count = `COUNT(${optvalue})` + (alias ? ` AS ${alias}` : '')
     return this
 }
 
-export function max(opt: string, alias: string){
+export function max(opt, alias){
     if(opt) {
         this.sqlObj.max = `MAX(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }
 
-export function min(opt: string, alias: string){
+export function min(opt, alias){
     if(opt) {
         this.sqlObj.min = `MIN(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }
 
-export function avg(opt: string, alias: string){
+export function avg(opt, alias){
     if(opt) {
         this.sqlObj.avg = `AVG(${opt})` + (alias ? ` AS ${alias}` : '')
     }
     return this
 }
 
-export function sum(opt: string, alias: string){
+export function sum(opt, alias){
     if(opt) {
         this.sqlObj.sum = `SUM(${opt})` + (alias ? ` AS ${alias}` : '')
     }

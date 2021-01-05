@@ -1,46 +1,25 @@
 {
-  "name": "mysqls-guopan",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "mysqls",
+  "version": "1.2.0",
+  "main": "build/main.js",
+  "typings": "build/main.d.ts",
+  "repository": "git@github.com:wangweianger/mysqls.git",
+  "author": "汪微 <752636052@qq.com>",
+  "license": "MIT",
   "scripts": {
-    "dev": "parcel ./index.html",
-    "build": "gulp"
-  },
-  "engines": {
-    "node": ">= 8.0.0",
-    "npm": ">= 4.2.0"
-  },
-  "author": "",
-  "license": "ISC",
-  "homepage": "http://blog.seosiwei.com/",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "build": "npm run clean && npm run compile",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
-    "cross-env": "^5.1.3",
-    "es6-promise": "^4.2.4",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sequence": "^0.4.6",
-    "gulp-uglify": "^3.0.0",
-    "mysql2": "^1.6.4",
-    "mysqls": "^1.0.0",
-    "symbol-observable": "^1.1.0"
+    "@types/sqlstring": "^2.3.0",
+    "gts": "^0.8.0",
+    "ts-node": "^7.0.1",
+    "typescript": "~3.4.0"
   },
   "dependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "mysql": "^2.15.0"
+    "mysql2": "^2.2.5",
+    "sqlstring": "^2.3.2"
   }
 }

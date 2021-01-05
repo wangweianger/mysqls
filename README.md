@@ -1,20 +1,20 @@
 ### [EN](/README.md) | [CN](/README-CN.md)
 
-# node-mysqls
+# mysqls
 It is written in JavaScript. crud for mysql. You can also use transactions very easily.
 
 mysqls：A plug-in that generates SQL statements for node.js. call chaining .simple to use. support transaction.
 
-* npm address：https://www.npmjs.com/package/node-mysqls
+* npm address：https://www.npmjs.com/package/mysqls
 
 ## install： 
 ```js 
-npm install node-mysqls --save
+npm install mysqls --save
 or
-yarn add node-mysqls
+yarn add mysqls
 ```
 
-## node-mysqls parameters
+## mysqls parameters
 >  * init:          sql Initialization
 >  * exec:          Executing SQL statements
 >  * sql:           Chain Call Generates SQL Statement

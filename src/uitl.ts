@@ -1,14 +1,15 @@
-import sqlstring from 'sqlstring'
+import * as sqlstring from 'sqlstring'
+import { AnyOpt } from './types'
 
 
-//把查询参数转换为string
-export function getOptToString(opt){
+//把查询参数转换为strng
+export function getOptToString(opt: string | AnyOpt | AnyOpt[]){
     let result  = ''
     let optType = Object.prototype.toString.call(opt)
     
     if(optType==='[object Object]'){
-        let _type = opt._type&&opt._type.toUpperCase() || 'AND'
-        let number = opt._type&&opt._type.trim()?1:0
+        let _type = (opt as AnyOpt)._type && (opt as AnyOpt)._type.toUpperCase() || 'AND'
+        let number = (opt as AnyOpt)._type && (opt as AnyOpt)._type.trim()?1:0
 
         let keys = Object.keys(opt)
         keys.forEach((item,index)=>{
@@ -28,7 +29,7 @@ export function getOptToString(opt){
             }
         })
     }else if(optType === '[object Array]'){
-        opt.forEach((item,index)=>{
+        (opt as AnyOpt[]).forEach((item,index)=>{
             let result1     =''
             let number      = 0
             let _type       = item._type&&item._type.toUpperCase() || 'AND'
@@ -65,8 +66,8 @@ export function getOptToString(opt){
 }
 
 //检查值类型返回相应值
-export function checkOptType(opt, key, type, bol){
-    let result
+export function checkOptType(opt: any, key?: string, type?:boolean , bol?: boolean){
+    let result: any
     switch(Object.prototype.toString.call(opt)){
         case "[object String]":
             opt = opt.trim();
@@ -151,48 +152,48 @@ export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
             result = `(${par_key} NOT IN (${value}))`
             break;                 
         default:
-            result = `(${par_key}=${checkOptType(value)})`
+            result = `(${par_key}=${checkOptType(value)})`    
     }
     return isLastOne ? `${result} ` : `${result} ${_type} `
 }
 
 //排序 生成 sql 字符串
-export function sortSelectSql(json, bool = false){
-    let result          = json || {}
+export function sortSelectSql(json, bool = false) {
+    let result = json || {}
     if (bool) {
-        if(result.table) result.table = `${result.table}`
+        if (result.table) result.table = `${result.table}`
     } else {
-        if(result.count||result.max||result.min||result.avg||result.sum){
-            let concatstr=(result.count?`,${result.count}`:'')
-                    +(result.max?`,${result.max}`:'')
-                    +(result.min?`,${result.min}`:'')
-                    +(result.avg?`,${result.avg}`:'')
-                    +(result.sum?`,${result.sum}`:'')
-            result.count=result.max=result.min=result.avg=result.sum='';
-            result.field? result.field = (result.field+concatstr) : result.field = concatstr.substring(1)
+        if (result.count || result.max || result.min || result.avg || result.sum) {
+            let concatstr = (result.count ? `,${result.count}` : '')
+                + (result.max ? `,${result.max}` : '')
+                + (result.min ? `,${result.min}` : '')
+                + (result.avg ? `,${result.avg}` : '')
+                + (result.sum ? `,${result.sum}` : '')
+            result.count = result.max = result.min = result.avg = result.sum = '';
+            result.field ? result.field = (result.field + concatstr) : result.field = concatstr.substring(1)
         }
-        if(!result.field)result.field = '*' 
-        if(result.table) result.table = `FROM ${result.table}`
-        if(result.where) result.where = `WHERE ${result.where}`
-    }   
+        if (!result.field) result.field = '*'
+        if (result.table) result.table = `FROM ${result.table}`
+        if (result.where) result.where = `WHERE ${result.where}`
+    }
 
     let keys = Object.keys(result)
     let keysresult = []
     // 查询默认排序数组
-    let searchSort  =  ['union','distinct','field','count','max','min','avg','sum','table',
-                        'alias', 'join', 'where','group','having','order','limit','page','comment']
+    let searchSort = ['union', 'distinct', 'field', 'count', 'max', 'min', 'avg', 'sum', 'table',
+        'alias', 'join', 'where', 'group', 'having', 'order', 'limit', 'page', 'comment']
     //排序                    
-    keys.forEach((item1,index1)=>{
-        searchSort.forEach((item2,index2)=>{
-            if(item1 === item2){
+    keys.forEach((item1, index1) => {
+        searchSort.forEach((item2, index2) => {
+            if (item1 === item2) {
                 keysresult[index2] = item1
             }
         })
     })
     return {
-        sortkeys:keysresult,
-        result:result
-    };               
+        sortkeys: keysresult,
+        result: result
+    };
 }
 
 function sortArray(data){
@@ -206,9 +207,9 @@ function sortArray(data){
         }
     }
     for (let i = 0; i < data.length; i++) {
-        let json = {};
+        let json: AnyOpt = {};
         for (let j = 0; j < item.length; j++) {
-            json[[item[j]]] = data[i][item[j]];
+            json[[item[j]] as any] = data[i][item[j]];
         }
         result.push(json)
     }
@@ -231,7 +232,7 @@ export function handleInsertData(data) {
         for(let i = 0; i < data.length; i++) {
             let items = ''
             for (let key in data[i]) {
-                items = `${items}` ? `${items},${checkOptType(data[i][key])}` : checkOptType(data[i][key])
+                items = items ? `${items},${checkOptType(data[i][key])}` : checkOptType(data[i][key])
             }
             values += `(${items}),`
         }
@@ -240,7 +241,7 @@ export function handleInsertData(data) {
         // object
         for (let key in data) {
             keys = keys ? `${keys},${key}` : key
-            values = `${values}` ? `${values},${checkOptType(data[key])}` : checkOptType(data[key])
+            values = values ? `${values},${checkOptType(data[key])}` : checkOptType(data[key])
         }
         values = `(${values})`;
     }

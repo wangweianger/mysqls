@@ -1,1 +1,222 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var _typeof2=require("babel-runtime/helpers/typeof"),_typeof3=_interopRequireDefault(_typeof2),_getIterator2=require("babel-runtime/core-js/get-iterator"),_getIterator3=_interopRequireDefault(_getIterator2),_keys=require("babel-runtime/core-js/object/keys"),_keys2=_interopRequireDefault(_keys);exports.table=table,exports.where=where,exports.join=join,exports.field=field,exports.alias=alias,exports.data=data,exports.order=order,exports.limit=limit,exports.page=page,exports.group=group,exports.having=having,exports.union=union,exports.distinct=distinct,exports.lock=lock,exports.comment=comment,exports.count=count,exports.max=max,exports.min=min,exports.avg=avg,exports.sum=sum;var _uitl=require("./uitl.js");function _interopRequireDefault(t){return t&&t.__esModule?t:{default:t}}function table(t){if("string"==typeof t)t&&-1!=t.indexOf("SELECT")&&(t="("+t+")"),t&&(this.sqlObj.table=t);else{var e=(0,_keys2.default)(t),r=[],i=!0,n=!1,s=void 0;try{for(var o=(0,_getIterator3.default)(e);!(i=(u=o.next()).done);i=!0){var u=u.value;r.push(u+" AS "+t[u])}}catch(t){n=!0,s=t}finally{try{!i&&o.return&&o.return()}finally{if(n)throw s}}this.sqlObj.table=r.join(", ")}return this}function where(t){var e="";return(e="string"==typeof t?t:(0,_uitl.getOptToString)(t))&&(this.sqlObj.where=e),this}function join(t){var e="";switch(Object.prototype.toString.call(t)){case"[object Array]":for(var r=0,i=t.length;r<i;r++)t[r].dir&&t[r].table&&t[r].where&&(e+=" "+t[r].dir.toUpperCase()+" JOIN "+(0,_uitl.sortSelectSql)(t[r].table,!0).result+" ON "+(0,_uitl.getOptToString)(t[r].where));break;case"[object Object]":if(!t.dir||!t.table||!t.where)return;e+=" "+t.dir.toUpperCase()+" JOIN "+(0,_uitl.sortSelectSql)(t.table,!0).result+" ON "+(0,_uitl.getOptToString)(t.where)}return e&&(this.sqlObj.join=e),this}function field(t){if("object"===(void 0===t?"undefined":(0,_typeof3.default)(t))){var e=[],r=!0,i=!1,n=void 0;try{for(var s,o=(0,_getIterator3.default)(t);!(r=(s=o.next()).done);r=!0){var u=s.value;if("string"==typeof u)e.push(u);else{var l=(0,_keys2.default)(u),a=!0,h=!1,f=void 0;try{for(var p=(0,_getIterator3.default)(l);!(a=(c=p.next()).done);a=!0){var c=c.value;e.push(c+" AS "+u[c])}}catch(t){h=!0,f=t}finally{try{!a&&p.return&&p.return()}finally{if(h)throw f}}}}}catch(t){i=!0,n=t}finally{try{!r&&o.return&&o.return()}finally{if(i)throw n}}t=e.join(", ")}return this.sqlObj.field=t,this}function alias(t){return this.sqlObj.alias=t,this}function data(t){var e={};return"string"==typeof t?t.split("&").forEach(function(t){t=t.split("=");e[t[0]]=t[1]}):e=t,this.sqlObj.data=e,this}function order(t){return"object"===(void 0===t?"undefined":(0,_typeof3.default)(t))&&(t=t.join(",")),this.sqlObj.order="ORDER BY "+t,this}function limit(){return this.sqlObj.limit="LIMIT "+Array.prototype.slice.apply(arguments),this}function page(t){var e=[];return 2==(e=1===arguments.length?t.split(","):Array.prototype.slice.apply(arguments)).length&&(t=parseInt(e[0]-1)*parseInt(e[1]),e=parseInt(e[1]),this.sqlObj.limit="LIMIT "+t+","+e),this}function group(t){return this.sqlObj.group="GROUP BY "+t,this}function having(t){return this.sqlObj.having="HAVING "+t,this}function union(t){var e=1<arguments.length&&void 0!==arguments[1]&&arguments[1];return"string"==typeof t?this.sqlObj.union?this.sqlObj.union=this.sqlObj.union+" ("+t+") "+(e?"UNION ALL":"UNION"):this.sqlObj.union="("+t+") "+(e?"UNION ALL":"UNION")+" ":"object"===(void 0===t?"undefined":(0,_typeof3.default)(t))&&(this.sqlObj.union?this.sqlObj.union=this.sqlObj.union+" ("+t.join(e?") UNION ALL (":") UNION (")+")  "+(e?"UNION ALL":"UNION")+" ":this.sqlObj.union="("+t.join(e?") UNION ALL (":") UNION (")+") "+(e?"UNION ALL":"UNION")+" "),this}function distinct(t){return t&&(this.sqlObj.distinct="DISTINCT"),this}function lock(t){return t&&(this.sqlObj.lock="FOR UPDATE"),this}function comment(t){return t&&(this.sqlObj.comment="/* "+t+" */"),this}function count(t,e){t=t||1;return this.sqlObj.count="COUNT("+t+")"+(e?" AS "+e:""),this}function max(t,e){return t&&(this.sqlObj.max="MAX("+t+")"+(e?" AS "+e:"")),this}function min(t,e){return t&&(this.sqlObj.min="MIN("+t+")"+(e?" AS "+e:"")),this}function avg(t,e){return t&&(this.sqlObj.avg="AVG("+t+")"+(e?" AS "+e:"")),this}function sum(t,e){return t&&(this.sqlObj.sum="SUM("+t+")"+(e?" AS "+e:"")),this}
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const uitl_1 = require("./uitl");
+//需要查询的table表  参数：String  案例：table('user')
+function table(opt) {
+    if (opt && opt.indexOf('SELECT') != -1) {
+        opt = `(${opt})`;
+    }
+    if (opt)
+        this.sqlObj.table = opt;
+    return this;
+}
+exports.table = table;
+/*where条件
+  参数为 String | Object | Array
+  案例：
+*/
+function where(opt) {
+    let result = '';
+    if (typeof (opt) === 'string') {
+        result = opt;
+    }
+    else {
+        result = uitl_1.getOptToString(opt);
+    }
+    if (result)
+        this.sqlObj.where = result;
+    return this;
+}
+exports.where = where;
+/*查询字段
+  参数为 String | Array
+  案例： field('id,name,age,sex')  | field(['id','name','age','sex'])
+*/
+function field(opt) {
+    if (typeof (opt) === 'object') {
+        opt = opt.join(',');
+    }
+    this.sqlObj.field = opt;
+    return this;
+}
+exports.field = field;
+/*设置别名
+  参数为 String
+  案例： alias('a')
+*/
+function alias(opt) {
+    this.sqlObj.alias = opt;
+    return this;
+}
+exports.alias = alias;
+/*设置data数据
+  参数为 json | string
+  案例： {name:'zane',email:'752636052@qq.com'}  |  'name=zane&email=752636052@qq.com'
+*/
+function data(opt) {
+    let newopt = {};
+    if (typeof (opt) === 'string') {
+        let arr = opt.split('&');
+        arr.forEach(item => {
+            let itemarr = item.split('=');
+            newopt[itemarr[0]] = itemarr[1];
+        });
+    }
+    else {
+        newopt = opt;
+    }
+    this.sqlObj.data = newopt;
+    return this;
+}
+exports.data = data;
+/*order排序
+  参数为 Array | string
+  案例： order(['id','number asc'])  | order('id desc')
+*/
+function order(opt) {
+    let orderby = 'ORDER BY';
+    if (typeof (opt) === 'object') {
+        opt = opt.join(',');
+    }
+    this.sqlObj.order = `${orderby} ${opt}`;
+    return this;
+}
+exports.order = order;
+/*limit 语句
+  参数类型 ： Number
+  案例 limit(10)  | limit(10,20)
+ */
+function limit() {
+    this.sqlObj.limit = `LIMIT ${Array.prototype.slice.apply(arguments)}`;
+    return this;
+}
+exports.limit = limit;
+/*page 语句
+  参数类型 ： Number | String
+  案例 page(1,10)  | page(2,10) | page('3,10')
+ */
+function page(option) {
+    let opt = [];
+    if (arguments.length === 1) {
+        opt = option.split(',');
+    }
+    else {
+        opt = Array.prototype.slice.apply(arguments);
+    }
+    if (opt.length == 2) {
+        let begin = parseInt((opt[0] - 1)) * parseInt(opt[1]);
+        let end = parseInt(opt[1]);
+        this.sqlObj.limit = `LIMIT ${begin},${end}`;
+    }
+    return this;
+}
+exports.page = page;
+/*group 语句
+  参数类型 ： String
+  案例        group('id,name')
+ */
+function group(opt) {
+    this.sqlObj.group = `GROUP BY ${opt}`;
+    return this;
+}
+exports.group = group;
+/*having 语句
+    参数类型： String
+    案例：    having('count(number)>3')
+ */
+function having(opt) {
+    this.sqlObj.having = `HAVING ${opt}`;
+    return this;
+}
+exports.having = having;
+/*union 语句
+    参数类型： String | Array
+    案例： union('SELECT name FROM node_user_1') | union(['SELECT name FROM node_user_1','SELECT name FROM node_user_2'])
+ */
+function union(opt, type = false) {
+    if (typeof (opt) === 'string') {
+        if (this.sqlObj.union) {
+            this.sqlObj.union = `${this.sqlObj.union} (${opt}) ${type ? 'UNION ALL' : 'UNION'}`;
+        }
+        else {
+            this.sqlObj.union = `(${opt}) ${type ? 'UNION ALL' : 'UNION'} `;
+        }
+    }
+    else if (typeof (opt) === 'object') {
+        if (this.sqlObj.union) {
+            this.sqlObj.union = `${this.sqlObj.union} (${opt.join(type ? ') UNION ALL (' : ') UNION (')})  ${type ? 'UNION ALL' : 'UNION'} `;
+        }
+        else {
+            this.sqlObj.union = `(${opt.join(type ? ') UNION ALL (' : ') UNION (')}) ${type ? 'UNION ALL' : 'UNION'} `;
+        }
+    }
+    return this;
+}
+exports.union = union;
+/*distinct 语句
+    参数类型： Boolean
+    案例： distinct(true)
+ */
+function distinct(opt) {
+    if (opt) {
+        this.sqlObj.distinct = 'DISTINCT';
+    }
+    return this;
+}
+exports.distinct = distinct;
+/* lock 锁语法
+    参数类型： Boolean
+    案例：  lock(true)
+ */
+function lock(opt) {
+    if (opt) {
+        this.sqlObj.lock = 'FOR UPDATE';
+    }
+    return this;
+}
+exports.lock = lock;
+/* comment 为sql语句添加注释
+    参数类型： String
+    案例：  comment('查询用户的姓名')
+ */
+function comment(opt) {
+    if (opt) {
+        this.sqlObj.comment = `/* ${opt} */`;
+    }
+    return this;
+}
+exports.comment = comment;
+function count(opt, alias) {
+    let optvalue = opt || 1;
+    this.sqlObj.count = `COUNT(${optvalue})` + (alias ? ` AS ${alias}` : '');
+    return this;
+}
+exports.count = count;
+function max(opt, alias) {
+    if (opt) {
+        this.sqlObj.max = `MAX(${opt})` + (alias ? ` AS ${alias}` : '');
+    }
+    return this;
+}
+exports.max = max;
+function min(opt, alias) {
+    if (opt) {
+        this.sqlObj.min = `MIN(${opt})` + (alias ? ` AS ${alias}` : '');
+    }
+    return this;
+}
+exports.min = min;
+function avg(opt, alias) {
+    if (opt) {
+        this.sqlObj.avg = `AVG(${opt})` + (alias ? ` AS ${alias}` : '');
+    }
+    return this;
+}
+exports.avg = avg;
+function sum(opt, alias) {
+    if (opt) {
+        this.sqlObj.sum = `SUM(${opt})` + (alias ? ` AS ${alias}` : '');
+    }
+    return this;
+}
+exports.sum = sum;

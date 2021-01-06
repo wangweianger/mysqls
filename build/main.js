@@ -8,28 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
-    auther : zane
-    version: 1.0.0
-    blog:http://blog.seosiwei.com
-    github: https://github.com/wangweianger/mysqls
-    npm: https://www.npmjs.com/package/mysqls
-*/
-const common = require("./common");
-const curd = require("./curd");
+const curd_1 = require("./curd");
 let connection = null;
 let ispool = true;
-//合并
-let sqljson = Object.assign({}, common, curd);
 //建立sql对象
-function mysql() {
-    this.sqlObj = {};
-    this.istransaction = false;
+class mysql extends curd_1.default {
+    constructor() {
+        super();
+        this.sqlObj = {};
+        this.istransaction = false;
+    }
 }
 mysql.prototype.exec = exec;
-for (let key in sqljson) {
-    mysql.prototype[key] = sqljson[key];
-}
 /**
  * 初始化
  *
@@ -72,8 +62,11 @@ exports.init = init;
  */
 function exec(sqlstring, type = false) {
     return __awaiter(this, void 0, void 0, function* () {
+        // @ts-ignore
         if (this instanceof mysql) {
+            // @ts-ignore
             sqlstring = this.sqlObj.sqlStr;
+            // @ts-ignore
             this.sqlObj = {};
         }
         return new Promise(function (resolve, reject) {

@@ -1,4 +1,11 @@
 import { Config } from './types';
+import CURD from './curd';
+declare class mysql extends CURD {
+    istransaction: boolean;
+    exec: (sqlstring: string, type?: boolean) => Promise<unknown>;
+    [propsname: string]: any;
+    constructor();
+}
 /**
  * 初始化
  *
@@ -23,4 +30,5 @@ export declare function exec(sqlstring: string, type?: boolean): Promise<{}>;
  * @returns
  */
 export declare function transaction(sqlstringArr?: string[]): Promise<{}>;
-export declare const sql: any;
+export declare const sql: mysql;
+export {};

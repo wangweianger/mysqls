@@ -5,29 +5,30 @@
     github: https://github.com/wangweianger/mysqls
     npm: https://www.npmjs.com/package/mysqls
 */
-import * as common from './common'
-import * as curd from './curd'
 import { Config } from './types'
+import CURD from './curd'
 
 
-
-let connection = null;
+let connection: any = null;
 let ispool = true;
 
-//合并
-let sqljson = Object.assign({}, common, curd)
 
 //建立sql对象
-function mysql() {
-    this.sqlObj = {}
-    this.istransaction = false;
+class mysql extends CURD {
+    istransaction: boolean;
+    exec: (sqlstring: string, type?: boolean) => Promise<unknown>;
+    [propsname:string]: any;
+
+    constructor() {
+        super();
+        this.sqlObj = {}
+        this.istransaction = false;
+    }
 }
+
 
 mysql.prototype.exec = exec;
 
-for (let key in sqljson) {
-    mysql.prototype[key] = sqljson[key]
-}
 
 
 /**
@@ -71,11 +72,14 @@ export function init(config: Config) {
  * @returns
  */
 export async function exec(sqlstring: string, type = false) {
+    // @ts-ignore
     if (this instanceof mysql){
+        // @ts-ignore
         sqlstring = this.sqlObj.sqlStr;
+        // @ts-ignore
         this.sqlObj = {};
     }
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject): any|void {
         if (!connection){
             reject('Please initialize mysql first.');
             return false;
@@ -100,7 +104,7 @@ export async function exec(sqlstring: string, type = false) {
  * @returns
  */
 export async function transaction(sqlstringArr: string[] = []) {
-    return new Promise(async function(resolve, reject) {
+    return new Promise(async function (resolve, reject): Promise<any> {
         if (!connection){
             reject('Please initialize mysql first.');
             return false;

@@ -14,17 +14,17 @@ export function getOptToString(opt: string | AnyOpt | AnyOpt[]){
         let keys = Object.keys(opt)
         keys.forEach((item,index)=>{
             if(item === '_type') return;
-            if(typeof(opt[item])==='object'){
+            if (typeof ((opt as AnyOpt)[item])==='object'){
                 if(index === keys.length-1-number){
-                    result = result +  `${checkOptObjType(item,opt[item])}`
+                    result = result + `${checkOptObjType(item, (opt as AnyOpt)[item])}`
                 }else{
-                    result = result +  `${checkOptObjType(item,opt[item])} ${_type} `
+                    result = result + `${checkOptObjType(item, (opt as AnyOpt)[item])} ${_type} `
                 }
             }else{
                 if(index === keys.length-1-number){
-                    result = result + `${item}=${checkOptType(opt[item])}`
+                    result = result + `${item}=${checkOptType((opt as AnyOpt)[item])}`
                 }else{
-                    result = result + `${item}=${checkOptType(opt[item])} ${_type} `  
+                    result = result + `${item}=${checkOptType((opt as AnyOpt)[item])} ${_type} `  
                 }
             }
         })
@@ -85,7 +85,7 @@ export function checkOptType(opt: any, key?: string, type?:boolean , bol?: boole
 }
 
 //检查object值类型 返回相应值
-export function checkOptObjType(pre_key,val){
+export function checkOptObjType(pre_key: string,val: any){
     let result=''
     let type = Object.prototype.toString.call(val)
 
@@ -112,7 +112,7 @@ export function checkOptObjType(pre_key,val){
 }
 
 // 表达式匹配查询
-export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
+export function expressionQuery(par_key: string, chi_key: string, value: string, _type: string, isLastOne: boolean){
     let result=''
     switch(chi_key.toUpperCase()){
         case 'EQ':
@@ -158,7 +158,7 @@ export function expressionQuery(par_key,chi_key,value,_type,isLastOne){
 }
 
 //排序 生成 sql 字符串
-export function sortSelectSql(json, bool = false) {
+export function sortSelectSql(json: AnyOpt , bool = false) {
     let result = json || {}
     if (bool) {
         if (result.table) result.table = `${result.table}`
@@ -178,7 +178,7 @@ export function sortSelectSql(json, bool = false) {
     }
 
     let keys = Object.keys(result)
-    let keysresult = []
+    let keysresult: any = []
     // 查询默认排序数组
     let searchSort = ['union', 'distinct', 'field', 'count', 'max', 'min', 'avg', 'sum', 'table',
         'alias', 'join', 'where', 'group', 'having', 'order', 'limit', 'page', 'comment']
@@ -196,7 +196,7 @@ export function sortSelectSql(json, bool = false) {
     };
 }
 
-function sortArray(data){
+function sortArray(data: AnyOpt[]){
     const result = [];
     const item = Object.keys(data[0])
     for (let i = 1; i < data.length; i++) {
@@ -217,7 +217,7 @@ function sortArray(data){
 }
 
 // 处理insert批量插入data参数
-export function handleInsertData(data) {
+export function handleInsertData(data: any) {
     if (!data) return '';
     if (Array.isArray(data) && data.length === 1) data = data[0];
 

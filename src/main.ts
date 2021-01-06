@@ -7,7 +7,8 @@
 */
 import { Config } from './types'
 import CURD from './curd'
-import * as mysql2 from 'mysql2'
+// @ts-ignore
+const mysql2 = require('mysql2')
 
 
 let connection: any = null;

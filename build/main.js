@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const curd_1 = require("./curd");
-const mysql2 = require("mysql2");
+// @ts-ignore
+const mysql2 = require('mysql2');
 let connection = null;
 let ispool = true;
 //建立sql对象

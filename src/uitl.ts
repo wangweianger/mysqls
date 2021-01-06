@@ -201,6 +201,7 @@ function sortArray(data: AnyOpt[]){
     const item = Object.keys(data[0])
     for (let i = 1; i < data.length; i++) {
         for (let j = 0; j < item.length; j++) {
+            // @ts-ignore
             if (!Object.keys(data[i]).includes(item[j])){
                 item.splice(j, 1);
             }

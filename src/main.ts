@@ -7,6 +7,7 @@
 */
 import { Config } from './types'
 import CURD from './curd'
+import * as mysql2 from 'mysql2'
 
 
 let connection: any = null;
@@ -38,7 +39,6 @@ mysql.prototype.exec = exec;
  * @param {Config} config
  */
 export function init(config: Config) {
-    const mysql2 = require('mysql2');
     ispool = typeof(config.ispool) === 'boolean' ? config.ispool : true;
     if (ispool) {
         connection = mysql2.createPool({
